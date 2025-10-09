@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page page0">
+	<div class="info">
+		<h1></h1>
+		<h2></h2>
+	</div>
+	<div class="group">
+		<div class="name-input">
+			<div class="profile-pic"><img src="profile.png" alt=""></div>
+			<input type="text" placeholder="What is your name?">
+			<div class="continue"><img src="login.png" alt=""></div>
+		</div>
+	</div>
+
+	<script>
+		let student_name = ''
+		let today = new Date();
+		let days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+		let dayName = days[today.getDay()];
+		let day = String(today.getDate()).padStart(2, '0');       // день с ведущим нулем
+		let month = String(today.getMonth() + 1).padStart(2, '0'); // месяц (0-11, поэтому +1)
+		let year = today.getFullYear();                            // год
+
+		let formattedDate = ``;
+		let page0 = document.querySelector('.page0')
+		page0.querySelector('h1').innerHTML = `02:38PM, ${dayName}, ${day}.${month}.${year}`
+		page0.querySelector('h2').innerHTML = 'Laboratorium super rahasia di Jawa'
+		// setTimeout(function() { document.querySelector('.next').click() }, 2000)
+	</script>
+	<script>
+		document.querySelector('.page0 .continue').addEventListener('click', function() {
+			student_name = document.querySelector('.page0 input').value
+			document.querySelectorAll('.student-name').forEach(el => {el.textContent = student_name})
+			document.querySelector('.next').style.display = 'flex'
+			document.querySelector('.next').click()
+		})
+	</script>
+</div>
+
+<div class="page page1">
+	<div class="bg1"></div>
+    <div class="bg2"></div>
+	<script>
+	</script>
+</div>
+
+<div class="page page2">
+	<div class="bubble topbubble"><p>We've got a <b>virus</b>. Come quick, call a detective!</p></div>
+	<div class="bubble bottombubble">IT'S URGENT!</div>
+	<div class="bg1"></div>
+</div>
+
+<div class="page page3">
+    <div class="bg1"></div>
+	<div class="bubble topbubble"><p>Hi, Mr. detective. Our system has been breached! someone let <b>virus</b> in!</p></div>
+	<div class="bubble bottombubble">Ohhh, again workers are not careful on the Internet...</div>
+</div>
+
+<div class="page page4">
+	<div class="bg1"></div>
+	<div class="bubble topbubble">Will you help me solve this case and prevent virus in the future?</div>
+	<div class="bubble bottombubble">
+		<div class="btn-btmbbl accept">I will</div>
+		<div class="btn-btmbbl deny">I won't</div>
+	</div>
+	<script>
+		document.querySelector('.page4 .accept').addEventListener('click', function() {
+			next.click()
+		})
+
+		document.querySelector('.page4 .deny').addEventListener('click', function() {
+			next.click()
+		})
+	</script>
+</div>
+
+<div class="page page5">
+	<div class="buttons">
+		<div class="button prev-screen"><img src="arrow.png" alt=""></div>
+		<div class="button next-screen"><img src="arrow.png" alt=""></div>
+	</div>
+	<div class="bubble topbubble"> <p>Let's take a look at worker's PC. Help me collect <b>4 clues</b></p> </div>
+	<div class="clues-count">
+		<div class="item"><img src="" alt=""></div>
+		<div class="item slot"><div class="default">?</div><img src="6.1.png" alt=""></div>
+		<div class="item slot"><div class="default">?</div><img src="6.2.png" alt=""></div>
+		<div class="item slot"><div class="default">?</div><img src="6.3.png" alt=""></div>
+		<div class="item slot"><div class="default">?</div><img src="6.4.png" alt=""></div>
+	</div>
+	<div class="screens">
+		<div class="screen sc1"></div>
+		<div class="screen sc2"></div>
+		<div class="screen sc3"></div>
+		<div class="screen sc4"></div>
+
+
+		<div class="clue clue1" id="fw1"></div>
+		<div class="clue clue2" id="fw2"></div>
+		<div class="clue clue3" id="fw3"></div>
+		<div class="clue clue4" id="fw4"></div>
+	</div>
+	<script>
+		let clues_collected = 0
+		let screens = document.querySelector('.screens')
+		let image_clues = document.querySelectorAll('.slot img')
+		let screen_change_allowed = true
+		let current_screen = 0
+		document.querySelector('.page5 .next-screen').addEventListener('click', e => {
+			if (!screen_change_allowed) { return }
+			if (current_screen == 3) { return }
+			screen_change_allowed = false
+			screens.animate([
+				{ left: `${-1 * current_screen * parseInt(window.innerWidth)}px` },
+				{ left: `${-1 * (current_screen + 1) * parseInt(window.innerWidth)}px` }
+			], {
+				duration: 700,
+				easing: 'linear',
+				fill: 'forwards'
+			}).finished.then(() => { screen_change_allowed = true; current_screen += 1 })
+		})
+
+		document.querySelector('.page5 .prev-screen').addEventListener('click', e => {
+			if (!screen_change_allowed) { return }
+			if (current_screen == 0) { return }
+			screen_change_allowed = false
+			screens.animate([
+				{ left: `${-1 * current_screen * parseInt(window.innerWidth)}px` },
+				{ left: `${-1 * (current_screen - 1) * parseInt(window.innerWidth)}px` }
+			], {
+				duration: 700,
+				easing: 'linear',
+				fill: 'forwards'
+			}).finished.then(() => { screen_change_allowed = true; current_screen -= 1 })
+		})
+
+		document.querySelector('.page5 .prev-screen').addEventListener('click', e => {screens.scrollBy({ left: -parseInt(window.innerWidth), behavior: 'smooth' })})
+		// document.addEventListener('keydown', (e) => {
+		// 	if (e.key === 'ArrowRight') {
+		//   		screens.scrollBy({ left: parseInt(window.innerWidth), behavior: 'smooth' });
+		// 	} else if (e.key === 'ArrowLeft') {
+		//   		screens.scrollBy({ left: -parseInt(window.innerWidth), behavior: 'smooth' });
+		// 	}
+	  	// })
+
+		function animateClue(n) {
+			let rect = image_clues[n-1].getBoundingClientRect()
+			document.querySelectorAll('.default')[n-1].style.display = 'none'
+			let dx = event.clientX - rect.left - rect.width / 2
+			let dy = event.clientY - rect.top - rect.height / 2
+			image_clues[n-1].animate([
+				{ transform: `translate(${dx}px, ${dy}px)`, opacity: 1 },
+				{ transform: 'translate(0, 0)', opacity: 1 }
+			], {
+				duration: 1000,
+				fill: 'forwards',
+				easing: 'ease-in-out',
+				delay: 300
+			})
+		}
+
+		function getViewportCoords(ximg, yimg, wimg, himg, wclue, hclue) {
+			let innerWidth = parseInt(window.innerWidth)
+			let innerHeight = parseInt(window.innerHeight)
+			
+			let x
+			let y
+			let h
+			let w
+
+			if (innerWidth / innerHeight > 1376 / 768) { // Если очень широко, значит изображение будет обрезаться по высоте
+				let h_expected = innerWidth * 768 / 1376
+				let dh = (h_expected - innerHeight) / 4
+				x = innerWidth * ximg / wimg
+				y = innerHeight * yimg / himg + dh
+				w = wclue * innerWidth / wimg
+				h = w * hclue / wclue
+			} else { // Иначе по ширине
+				let w_expected = innerHeight * 1376 / 768
+				let dw = (w_expected - innerWidth) / 4
+				x = innerWidth * ximg / wimg + dw
+				y = innerHeight * yimg / himg
+				h = hclue * innerHeight / himg
+				w = h * wclue / hclue
+			}
+
+			return { x: x, y: y, w: w, h: h }
+		}
+
+		let clues_data = [ // ximg, yimg, wimg, himg, wclue, hclue
+			[1070, 540, 1376, 768, 208, 195],
+			[803, 434, 1376, 768, 225, 292],
+			[270, 610, 1376, 768, 350, 140],
+			[849, 365, 1376, 768, 264, 221]
+		]
+
+		let clues_elems = document.querySelectorAll('.page5 .clue')
+
+		for (let i = 0; i < 4; i += 1) {
+			function removeListener() {
+				animateClue(this.id[2])
+				clues_collected += 1
+				if (clues_collected == 4) {
+					document.querySelector('.next').style.display = 'flex'
+				}
+				clues_elems[i].removeEventListener('click', removeListener)
+			}
+
+			let coords = getViewportCoords(...clues_data[i])
+			clues_elems[i].style.width = `${coords['w']}px`
+			clues_elems[i].style.height = `${coords['h']}px`
+			clues_elems[i].style.top = `${coords['y']}px`
+			clues_elems[i].style.left = `${coords['x'] + innerWidth * i}px`
+			clues_elems[i].addEventListener('click', removeListener)
+		}
+
+	</script>
+</div>
+
+<div class="page page6">
+	<div class="bubble topbubble"><p>Now help me find the suspect. We know for sure that <b>Rizky</b> doesn't drive a car.</p></div>
+	<div class="table">
+		<div class="item corner"></div>
+		<div class="item head">Clue</div>
+		<div class="item head">Darmawan</div>
+		<div class="item"><img src="6.1.png" alt=""></div>
+		<div class="item head">Fitri</div>
+		<div class="item"><img src="6.2.png" alt=""></div>
+		<div class="item head">Kartika</div>
+		<div class="item dropZone"></div>
+		<div class="item head">Rizky</div>
+		<div class="item dropZone"></div>
+	</div>
+	<div class="inventory">
+		<div class="item clue1">
+			<img id="clue1" src="6.3.png" alt="" draggable="true">
+		</div>
+		<div class="item clue2">
+			<img id="clue2" src="6.4.png" alt="" draggable="true">
+		</div>
+	</div>
+	<script>
+		let clue1 = document.getElementById('clue1')
+		let clue2 = document.getElementById('clue2')
+		let dropZones = document.querySelectorAll('.dropZone')
+
+		let zonesCorrect = [false, false]
+
+		clue1.addEventListener('dragstart', (e) => {
+			e.dataTransfer.setData('text/plain', e.target.id)
+			e.dataTransfer.effectAllowed = "move"
+		});
+
+		clue2.addEventListener('dragstart', (e) => {
+			e.dataTransfer.setData('text/plain', e.target.id)
+			e.dataTransfer.effectAllowed = "move"
+		});
+
+		dropZones.forEach((zone, index) => {
+			zone.addEventListener('dragover', (e) => {
+				e.preventDefault()
+				e.dataTransfer.dropEffect = "move"
+			});
+
+			zone.addEventListener('drop', (e) => {
+				e.preventDefault();
+
+				const id = e.dataTransfer.getData('text/plain')
+				const draggedElement = document.getElementById(id)
+				const fromZone = draggedElement.parentElement
+				const existing = zone.querySelector('img')
+
+				if (existing) {
+					zone.appendChild(draggedElement)
+					fromZone.appendChild(existing)
+				} else {
+					zone.appendChild(draggedElement)
+				}
+
+				zonesCorrect[0] = dropZones[0].querySelector('#clue1') !== null
+				zonesCorrect[1] = dropZones[1].querySelector('#clue2') !== null
+				if (zonesCorrect[0] && zonesCorrect[1]) {
+					next.style.display = 'flex'
+				} else {
+					next.style.display = 'none'
+				}
+
+			})
+		})
+	</script>
+</div>
+
+<div class="page page7">
+	<div class="bubble topbubble">
+		<p>What did <b>Rizky</b> do wrong? What were his two mistakes?</p>
+	</div>
+	<div class="test">
+		<div class="test-answer"> <div class="checkbox" id="c71"></div> <div class="answer">His password was too easy</div> </div>
+		<div class="test-answer"> <div class="checkbox" id="c72"></div> <div class="answer">He forgot his notebook</div> </div>
+		<div class="test-answer"> <div class="checkbox" id="c73"></div> <div class="answer">He left the car open</div> </div>
+		<div class="test-answer"> <div class="checkbox" id="c74"></div> <div class="answer">He put sticky note with password and everyone saw it</div> </div>
+		<div class="btn-check">Check answer</div>
+	</div>
+</div>
+
+
+<div class="page page8">
+	<div class="bubble topbubble"><p>Do you understand what you did wrong now, Rizky?</p></div>
+	<div class="bubble bottombubble"><p>Yes, I do. I will <b>make a stronger password</b> now, but I don't know the rules. Will you help me?</p></div>
+</div>
+
+<div class="page page9">
+	<div class="bubble topbubble">Password is not strong enough yet.</div>
+	<input type="text" placeholder="Start entering password">
+	<div class="conditions">
+		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>At least 8 letters</b> for strength</div></div>
+		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>At least</b> one <b>capital</b> and one <b>regular</b> letters for strngth</div></div>
+		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>At least one digit</b> for strength</div></div>
+		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>At least one special symbol</b> for strength</div></div>
+	</div>
+	<div class="btn-check">Check password strength</div>
+</div>
+
+<div class="page page10">
+	<div class="bubble topbubble"><p>Now I know how to be safe on the Internet. Thank you, <span class="student-name"></span></p></div>
+</div>
+
+<div class="page page11">
+	<div class="bubble topbubble"><p>Let's create an Internet safety <b>squad</b>. Draw a logo!</p></div>
+	<div class="field-container">
+		<div class="color-palette">
+			<div class="color-cell red selected" data-colorcode="1"></div>
+			<div class="color-cell green" data-colorcode="2"></div>
+			<div class="color-cell blue" data-colorcode="3"></div>
+			<div class="color-cell yellow" data-colorcode="4"></div>
+			<div class="color-cell skyblue" data-colorcode="5"></div>
+			<div class="tool-cell eraser">
+				<img src="eraser_white.png" alt="">
+			</div>
+			<div class="tool-cell fill-tool">
+				<img src="bucket_white.png" alt="">
+			</div>
+			
+		</div>
+		<div class="field"></div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js" integrity="sha512-aNMyYYxdIxIaot0Y1/PLuEu3eipGCmsEUBrUq+7aVyPGMFH8z0eTP0tkqAvv34fzN6z+201d3T8HPb1svWSKHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="paint.js"></script>
+</div>
+
+<div class="page page12">
+	<div class="cert">
+		<img class="cert-bg" src="cert-bg.png" alt="">
+		<div class="sprite"><img src="sprite.png" alt=""></div>
+		<div class="h1"><p>Certificate of <span style="color: #ff7e5f">Internet Safety</span> Squad Leader</p></div>
+		<div class="student-name"></div>
+		<div class="info">
+			<div class="head">My squad will:</div>
+			<div class="head-i"><div class="pic"><img src="mouse.png" alt=""></div><div class="text">Teach you how to <b>move mouse</b></div></div>
+			<div class="head-i"><div class="pic"><img src="virus.png" alt=""></div><div class="text"><b>Protect</b> you from <b>virus</b></div></div>
+			<div class="head-i"><div class="pic"><img src="lock.png" alt=""></div><div class="text">Make you <b>strong password</b></div></div>
+			<div class="head-i"><div class="pic"><img src="art.png" alt=""></div><div class="text"><b>Draw</b> you a pixel picture</div></div>
+		</div>
+	</div>
+</div>
+
+
+<div class="main-next next"><img src="next.png" alt=""></div>
+
+
+<script>
+let next = document.querySelector('.next')
+let current_page = 0
+let pages = document.querySelectorAll('.page')
+let next_ok = true
+
+function animateBubbles(page) {
+	page.querySelector('.topbubble').animate([
+			{ transform: 'translateY(-150px)', opacity:0 },
+			{ transform: `translateY(0)`, opacity: 1 }
+		],
+		{
+			duration: 500,
+			fill: "forwards",
+			easing: "ease-in-out",
+			delay: 200
+		})
+	
+	
+	if (page.querySelector('.bottombubble')) {
+		page.querySelector('.bottombubble').animate([
+			{ transform: 'translateY(150px)', opacity:0 },
+			{ transform: 'translateY(0)', opacity: 1}
+		],
+		{
+			duration: 500,
+			fill: "forwards",
+			easing: "ease-in-out",
+			delay: 1500
+		})
+	}
+}
+
+function removeTopBubble(page, delay) {
+	page.querySelector('.topbubble').animate([
+		{ transform: 'translateY(0)', opacity: 1 },
+		{ transform: `translateY(-150px)`, opacity: 0 }
+	],
+	{
+		duration: 500,
+		fill: "forwards",
+		easing: "ease-in-out",
+		delay: delay
+	})
+}
+
+function animatebg(page) {
+	page.animate([
+		{transform: 'scale(1) rotate(0)'},
+		{transform: 'scale(1.1) rotate(3deg)'}
+	],
+	{
+		duration: 20000,
+		fill: "forwards",
+		easing: "linear"
+	})
+}
+
+function animateContition(el) {
+	if (getComputedStyle(el).transform.match(/-?[\d.]+/g).map(Number)[5] < 500) { return }
+	el.animate([
+		{ transform: 'translateY(200px)', opacity: 0 },
+		{ transform: 'translateY(0)', opacity: 1 }
+	],
+	{
+		duration: 400,
+		fill: "forwards",
+		easing: "ease-in-out"
+	})
+}
+
+function getScale() {
+	let certStyles = getComputedStyle(document.querySelector('.cert'))
+	let toScale = 0.9 * window.innerHeight / parseInt(certStyles.height)
+	return toScale
+}
+
+next.addEventListener('click', () => {
+	if (next_ok) {
+		next_ok = !next_ok
+		pages[current_page].animate([
+			{ opacity: 1 },
+			{ opacity: 0 }
+		], {
+			duration: 1000, // длительность в мс (1 сек)
+			fill: 'forwards' // чтобы сохранилось финальное состояние
+		})
+		pages[current_page + 1].animate([
+			{ opacity: 0 },
+			{ opacity: 1 }
+		], {
+			duration: 1000, // длительность в мс (1 сек)
+			fill: 'forwards' // чтобы сохранилось финальное состояние
+		}).finished.then(() => {
+			pages[current_page].style.display = 'none'
+			current_page += 1 // KOSTYL
+			if (current_page == 1) {
+				animatebg(pages[current_page])
+			} else if (current_page == 2) {
+				animatebg(pages[current_page])
+				animateBubbles(pages[current_page])
+			} else if (current_page == 3) {
+				animateBubbles(pages[current_page])
+			} else if (current_page == 4) {
+				animatebg(pages[current_page])
+				animateBubbles(pages[current_page])
+				next.style.display = 'none'
+			} else if (current_page == 5) {
+				animateBubbles(pages[current_page])
+				next.style.display = 'none'
+			} else if (current_page == 6) {
+				next.style.display = 'none'
+				animateBubbles(pages[current_page])
+			} else if (current_page == 7) {
+				next.style.display = 'none'
+				animateBubbles(pages[current_page])
+				pages[current_page].querySelector('.test').animate([
+					{ transform: 'translateX(-50vw)' },
+					{ transform: `translateX(60px)`}
+				],
+				{
+					duration: 500,
+					fill: "forwards",
+					easing: "ease-in-out",
+					delay: 600
+				})
+				let answers = []
+				let checkboxes = document.querySelectorAll('.checkbox')
+				let chkbx_listeners = []
+				for (let i = 0; i < 4; i += 1) {
+					checkboxes[i].addEventListener('click', function() {
+						if (answers.includes(i)) {
+							answers = answers.filter(item => item !== i)
+							checkboxes[i].classList.remove('checked')
+						} else {
+							answers.push(i)
+							checkboxes[i].classList.add('checked')
+						}
+					})
+				}
+				document.querySelector('.page7 .btn-check').addEventListener('click', function() {
+					if (answers.length === 2 &&
+						answers.includes(0) &&
+						answers.includes(3) &&
+						answers.every(num => num === 0 || num === 3)) {
+							next.style.display = 'flex'
+							document.querySelector('.test').style.pointerEvents = 'none'
+						}
+				})
+			} else if (current_page == 8) {
+				animateBubbles(pages[current_page])
+			} else if (current_page == 9) {
+				next.style.display = 'none'
+				// animateBubbles(pages[current_page])
+				let input = pages[current_page].querySelector('input')
+				let conditions = document.querySelectorAll('.condition')
+				let initial_cycle = true
+
+				let strength = [false, false, false, false]
+
+				input.addEventListener('input', function() {
+					if (initial_cycle) {
+						animateContition(conditions[0])
+						initial_cycle = false
+					}
+					
+					if (this.value.length >= 8) {
+						animateContition(conditions[1])
+						if (/[A-Z]/.test(this.value)) {
+							animateContition(conditions[2])
+							if (/[0-9]/.test(this.value)) {
+								animateContition(conditions[3])
+								
+							}
+						}
+					}
+
+					if (this.value.length >= 8) { conditions[0].style.background = 'rgb(217, 255, 208)'; strength[0] = true } else { conditions[0].style.background = 'rgb(255,239,208)'; strength[0] = false }
+					if (/[A-Z]/.test(this.value)) { conditions[1].style.background = 'rgb(217, 255, 208)'; strength[1] = true } else { conditions[1].style.background = 'rgb(255,239,208)'; strength[1] = false }
+					if (/[0-9]/.test(this.value)) { conditions[2].style.background = 'rgb(217, 255, 208)'; strength[2] = true } else { conditions[2].style.background = 'rgb(255,239,208)'; strength[2] = false }
+					if (/[!@#$%^&*()_\+\-=\[\]{};:'",.<>?\\/]/.test(this.value)) { conditions[3].style.background = 'rgb(217, 255, 208)'; strength[3] = true } else { conditions[3].style.background = 'rgb(255,239,208)'; strength[3] = false }
+					if (strength[0] && strength[1] && strength[2] && strength[3]) {
+						document.querySelector('.page9 .topbubble').innerHTML = 'Unhackable!'
+						next.style.display = 'flex'
+					} else {
+						document.querySelector('.page9 .topbubble').innerHTML = 'Not strong enough yet.'
+						next.style.display = 'none'
+					}
+				})
+
+				document.querySelector('.page9 .btn-check').addEventListener('click', function() {
+					animateBubbles(pages[current_page])
+					removeTopBubble(pages[current_page], 2000)
+				})
+			} else if (current_page == 10) {
+				animateBubbles(pages[current_page])
+				next.style.display = 'flex'
+			} else if (current_page == 11) {
+				animateBubbles(pages[current_page])
+				next.style.display = 'flex'
+			} else if (current_page == 12) {
+				next.style.display = 'none'
+				let cert = document.querySelector('.page12 .cert')
+				cert.appendChild(document.querySelector('.page11 .field'))
+				// let copy = cert.cloneNode(true)
+				// copy.classList.add('toDownload')
+				// copy.style.position = 'absolute'
+				// copy.style.top = '10000px'
+				// pages[current_page].appendChild(copy)
+				cert.style.transform = `scale(${getScale()})`
+			}
+			next_ok = !next_ok
+		})
+	}
+	
+})
+</script>
+
+<!-- <script src="confetti.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+function download_cert() {
+	document.querySelector('.cert').style.transform = `none`
+    domtoimage.toPng(document.querySelector('.cert'), {quality: 1})
+    .then(function (dataUrl) {
+        var img = new Image()
+        img.src = dataUrl
+        let link = document.createElement('a')
+        link.download = 'Squad Leader Cerrificate.png'
+        link.href = dataUrl
+        link.click()
+		document.querySelector('.cert').style.transform = `scale(${getScale()})`
+    })
+    .catch(function (error) {
+        console.error('oops, something went wrong!', error);
+    })
+	document.querySelector('.cert').removeEventListener('click', download_cert)
+	
+}
+document.querySelector('.cert').addEventListener('click', download_cert)
+</script>
+</body>
+</html>
