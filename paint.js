@@ -1,10 +1,10 @@
 // Подгрузка из cookie
 function get_result_from_cookie() {
     let cookies = document.cookie.split('; ')
-    console.log(cookies)
+    // console.log(cookies)
     for (let i = 0; i < cookies.length; i += 1) {
         let cookie = cookies[i].split('=')
-        console.log(cookie)
+        // console.log(cookie)
         if (cookie[0] == 'pixel-result') {
             return cookie[1]
         }
@@ -32,7 +32,7 @@ document.addEventListener('mouseup', function() {
 // Заполняем поле таким количеством клеток, сколько предусмотрено в grid-е
 let field = document.querySelector('.page11 .field')
 let temp_result = get_result_from_cookie()
-console.log('temp-result', temp_result)
+// console.log('temp-result', temp_result)
 if (temp_result != '0') {
     for (let i = 0; i < 400; i+=1) {
         let cell = document.createElement('div')
@@ -147,6 +147,6 @@ setInterval(function() {
     }
     
     document.cookie = `pixel-result=${result};max-age=100000`
-    console.log(document.cookie)
+    // console.log(document.cookie)
     
 }, 60000)
