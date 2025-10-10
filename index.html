@@ -39,6 +39,7 @@
 	<script>
 		document.querySelector('.page0 .continue').addEventListener('click', function() {
 			student_name = document.querySelector('.page0 input').value
+			saveName(student_name)
 			document.querySelectorAll('.student-name').forEach(el => {el.textContent = student_name})
 			document.querySelector('.next').style.display = 'flex'
 			document.querySelector('.next').click()
@@ -358,19 +359,22 @@
 </div>
 
 <div class="page page12">
-	<div class="cert">
-		<img class="cert-bg" src="cert-bg.png" alt="">
-		<div class="sprite"><img src="sprite.png" alt=""></div>
-		<div class="h1"><p>Certificate of <span style="color: #ff7e5f">Internet Safety</span> Squad Leader</p></div>
-		<div class="student-name"></div>
-		<div class="info">
-			<div class="head">My squad will:</div>
-			<div class="head-i"><div class="pic"><img src="mouse.png" alt=""></div><div class="text">Teach you how to <b>move mouse</b></div></div>
-			<div class="head-i"><div class="pic"><img src="virus.png" alt=""></div><div class="text"><b>Protect</b> you from <b>virus</b></div></div>
-			<div class="head-i"><div class="pic"><img src="lock.png" alt=""></div><div class="text">Make you <b>strong password</b></div></div>
-			<div class="head-i"><div class="pic"><img src="art.png" alt=""></div><div class="text"><b>Draw</b> you a pixel picture</div></div>
+	<!-- <div class="left"> -->
+		<div class="cert">
+			<img class="cert-bg" src="cert-bg.png" alt="">
+			<div class="sprite"><img src="sprite.png" alt=""></div>
+			<div class="h1"><p>Certificate of <span style="color: #ff7e5f">Internet Safety</span> Squad Leader</p></div>
+			<div class="student-name"></div>
+			<div class="info">
+				<div class="head">My squad will:</div>
+				<div class="head-i"><div class="pic"><img src="mouse.png" alt=""></div><div class="text">Teach you how to <b>move mouse</b></div></div>
+				<div class="head-i"><div class="pic"><img src="virus.png" alt=""></div><div class="text"><b>Protect</b> you from <b>virus</b></div></div>
+				<div class="head-i"><div class="pic"><img src="lock.png" alt=""></div><div class="text">Make you <b>strong password</b></div></div>
+				<div class="head-i"><div class="pic"><img src="art.png" alt=""></div><div class="text"><b>Draw</b> you a pixel picture</div></div>
+			</div>
 		</div>
-	</div>
+	<!-- </div>
+	<div class="right"></div> -->
 </div>
 
 
@@ -658,6 +662,17 @@ document.querySelector('.cert').addEventListener('click', download_cert)
 
 		if (error) console.error('Error starting game:', error)
 		else currentGameId = data.id
+	}
+
+	async function saveName(name) {
+		  const data = { [`name`]: name };
+		  const { error } = await supabaseClient
+			.from('Timings')
+			.update(data)
+			.eq('id', currentGameId)
+
+		  if (error) console.error('Error:', error);
+		  else console.log('Saved:', data);
 	}
 
 	async function saveSceneTime(page, timeMs) {

@@ -881,6 +881,9 @@ body {
     z-index: 988;
     overflow: scroll;
     flex-shrink: 0;
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 70vh calc(100% - 70vh);
 }
 
 .page12 .cert {
