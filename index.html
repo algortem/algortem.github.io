@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Selamatkan laboratorium</title>
 	<link rel="stylesheet" href="style.css">
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -32,7 +32,7 @@
 
 		let formattedDate = ``;
 		let page0 = document.querySelector('.page0')
-		page0.querySelector('h1').innerHTML = `02:38PM, ${dayName}, ${day}.${month}.${year}`
+		page0.querySelector('h1').innerHTML = `${today.getHours()}:${today.getMinutes()}, ${dayName}, ${day}.${month}.${year}`
 		page0.querySelector('h2').innerHTML = 'Laboratorium super rahasia di Jawa'
 		// setTimeout(function() { document.querySelector('.next').click() }, 2000)
 	</script>
@@ -55,23 +55,23 @@
 </div>
 
 <div class="page page2">
-	<div class="bubble topbubble"><p>We've got a <b>virus</b>. Come quick, call a detective!</p></div>
-	<div class="bubble bottombubble">IT'S URGENT!</div>
+	<div class="bubble topbubble"><p>Kami terkena <b>virus</b>. Cepat, panggil detektif!</p></div>
+	<div class="bubble bottombubble">ITU DARURAT!</div>
 	<div class="bg1"></div>
 </div>
 
 <div class="page page3">
     <div class="bg1"></div>
-	<div class="bubble topbubble"><p>Hi, Mr. detective. Our system has been breached! someone let <b>virus</b> in!</p></div>
-	<div class="bubble bottombubble">Ohhh, again workers are not careful on the Internet...</div>
+	<div class="bubble topbubble"><p>Halo, Tuan Detektif. Sistem kami telah diretas! Seseorang membiarkan <b>virus</b> masuk!</p></div>
+	<div class="bubble bottombubble">Ohhh, lagi-lagi para pekerja tidak berhati-hati di Internet...</div>
 </div>
 
 <div class="page page4">
 	<div class="bg1"></div>
-	<div class="bubble topbubble">Will you help me solve this case and prevent virus in the future?</div>
+	<div class="bubble topbubble">Apakah Anda akan membantu saya memecahkan kasus ini dan mencegah virus di masa depan?</div>
 	<div class="bubble bottombubble">
-		<div class="btn-btmbbl accept">I will</div>
-		<div class="btn-btmbbl deny">I won't</div>
+		<div class="btn-btmbbl accept">Saya akan</div>
+		<div class="btn-btmbbl deny">Saya tidak akan</div>
 	</div>
 	<script>
 		document.querySelector('.page4 .accept').addEventListener('click', function() {
@@ -89,7 +89,7 @@
 		<div class="button prev-screen"><img src="arrow.png" alt=""></div>
 		<div class="button next-screen"><img src="arrow.png" alt=""></div>
 	</div>
-	<div class="bubble topbubble"> <p>Let's take a look at worker's PC. Help me collect <b>4 clues</b></p> </div>
+	<div class="bubble topbubble"> <p>Mari kita lihat PC pekerja. Bantu saya mengumpulkan <b>4 bukti</b></p> </div>
 	<div class="clues-count">
 		<div class="item"><img src="" alt=""></div>
 		<div class="item slot"><div class="default">?</div><img src="6.1.png" alt=""></div>
@@ -227,10 +227,10 @@
 </div>
 
 <div class="page page6">
-	<div class="bubble topbubble"><p>Now help me find the suspect. We know for sure that <b>Rizky</b> doesn't drive a car.</p></div>
+	<div class="bubble topbubble"><p>Sekarang bantu saya mencari tersangka. Kita yakin bahwa <b>Rizky</b> tidak mengendarai mobil.</p></div>
 	<div class="table">
 		<div class="item corner"></div>
-		<div class="item head">Clue</div>
+		<div class="item head">bukti</div>
 		<div class="item head">Darmawan</div>
 		<div class="item"><img src="6.1.png" alt=""></div>
 		<div class="item head">Fitri</div>
@@ -301,41 +301,40 @@
 
 <div class="page page7">
 	<div class="bubble topbubble">
-		<p>What did <b>Rizky</b> do wrong? What were his two mistakes?</p>
+		<p>Apa kesalahan yang dilakukan <b>Rizky</b>? Apa dua kesalahannya?</p>
 	</div>
 	<div class="test">
-		<div class="test-answer"> <div class="checkbox" id="c71"></div> <div class="answer">His password was too easy</div> </div>
-		<div class="test-answer"> <div class="checkbox" id="c72"></div> <div class="answer">He forgot his notebook</div> </div>
-		<div class="test-answer"> <div class="checkbox" id="c73"></div> <div class="answer">He left the car open</div> </div>
-		<div class="test-answer"> <div class="checkbox" id="c74"></div> <div class="answer">He put sticky note with password and everyone saw it</div> </div>
-		<div class="btn-check">Check answer</div>
+		<div class="test-answer"> <div class="checkbox" id="c71"></div> <div class="answer">Kata sandinya terlalu mudah</div> </div>
+		<div class="test-answer"> <div class="checkbox" id="c72"></div> <div class="answer">Dia lupa membawa buku catatannya</div> </div>
+		<div class="test-answer"> <div class="checkbox" id="c73"></div> <div class="answer">Dia meninggalkan mobil terbuka</div> </div>
+		<div class="test-answer"> <div class="checkbox" id="c74"></div> <div class="answer">Dia menempelkan catatan dengan kata sandi sehingga semua orang bisa melihatnya</div> </div>
+		<div class="btn-check">Periksa jawaban</div>
 	</div>
 </div>
 
-
 <div class="page page8">
-	<div class="bubble topbubble"><p>Do you understand what you did wrong now, Rizky?</p></div>
-	<div class="bubble bottombubble"><p>Yes, I do. I will <b>make a stronger password</b> now, but I don't know the rules. Will you help me?</p></div>
+	<div class="bubble topbubble"><p>Apakah kamu sekarang mengerti kesalahanmu, Rizky?</p></div>
+	<div class="bubble bottombubble"><p>Ya, saya mengerti. Saya akan <b>membuat kata sandi yang lebih kuat</b> sekarang, tapi saya tidak tahu aturannya. Bisa tolong bantu saya?</p></div>
 </div>
 
 <div class="page page9">
-	<div class="bubble topbubble">Password is not strong enough yet.</div>
+	<div class="bubble topbubble">Kata sandi masih belum cukup kuat.</div>
 	<input type="text" placeholder="Start entering password">
 	<div class="conditions">
-		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>At least 8 letters</b> for strength</div></div>
-		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>At least</b> one <b>capital</b> and one <b>regular</b> letters for strngth</div></div>
-		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>At least one digit</b> for strength</div></div>
-		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>At least one special symbol</b> for strength</div></div>
+		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>Minimal 8 huruf</b> untuk kekuatan kata sandi</div></div>
+		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>Minimal</b> satu huruf <b>besar</b> dan satu huruf <b>kecil</b> untuk kekuatan kata sandi</div></div>
+		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>Minimal satu angka</b> untuk kekuatan kata sandi</div></div>
+		<div class="condition"><div class="icon"><img src="information.png" alt=""></div><div class="text"><b>Minimal satu simbol khusus</b> untuk kekuatan kata sandi</div></div>
 	</div>
-	<div class="btn-check">Check password strength</div>
+	<div class="btn-check">Periksa kekuatan kata sandi</div>
 </div>
 
 <div class="page page10">
-	<div class="bubble topbubble"><p>Now I know how to be safe on the Internet. Thank you, <span class="student-name"></span></p></div>
+	<div class="bubble topbubble"><p>Sekarang saya tahu bagaimana cara aman di Internet. Terima kasih, <span class="student-name"></span></p></div>
 </div>
 
 <div class="page page11">
-	<div class="bubble topbubble"><p>Let's create an Internet safety <b>squad</b>. Draw a logo!</p></div>
+	<div class="bubble topbubble"><p>Mari kita buat <b>tim</b> keamanan Internet. Gambar logonya!</p></div>
 	<div class="field-container">
 		<div class="color-palette">
 			<div class="color-cell red selected" data-colorcode="1"></div>
@@ -366,11 +365,11 @@
 			<div class="h1"><p>Certificate of <span style="color: #ff7e5f">Internet Safety</span> Squad Leader</p></div>
 			<div class="student-name"></div>
 			<div class="info">
-				<div class="head">My squad will:</div>
-				<div class="head-i"><div class="pic"><img src="mouse.png" alt=""></div><div class="text">Teach you how to <b>move mouse</b></div></div>
-				<div class="head-i"><div class="pic"><img src="virus.png" alt=""></div><div class="text"><b>Protect</b> you from <b>virus</b></div></div>
-				<div class="head-i"><div class="pic"><img src="lock.png" alt=""></div><div class="text">Make you <b>strong password</b></div></div>
-				<div class="head-i"><div class="pic"><img src="art.png" alt=""></div><div class="text"><b>Draw</b> you a pixel picture</div></div>
+				<div class="head">Tim saya akan:</div>
+				<div class="head-i"><div class="pic"><img src="mouse.png" alt=""></div><div class="text">Mengajari kamu cara <b>menggerakkan mouse</b></div></div>
+				<div class="head-i"><div class="pic"><img src="virus.png" alt=""></div><div class="text"><b>Melindungi</b> kamu dari <b>virus</b></div></div>
+				<div class="head-i"><div class="pic"><img src="lock.png" alt=""></div><div class="text">Membuat kamu <b>kata sandi yang kuat</b></div></div>
+				<div class="head-i"><div class="pic"><img src="art.png" alt=""></div><div class="text"><b>Menggambar</b> gambar pixel untukmu</div></div>
 			</div>
 		</div>
 	<!-- </div>
@@ -583,10 +582,10 @@ next.addEventListener('click', () => {
 					if (/[0-9]/.test(this.value)) { conditions[2].style.background = 'rgb(217, 255, 208)'; strength[2] = true } else { conditions[2].style.background = 'rgb(255,239,208)'; strength[2] = false }
 					if (/[!@#$%^&*()_\+\-=\[\]{};:'",.<>?\\/]/.test(this.value)) { conditions[3].style.background = 'rgb(217, 255, 208)'; strength[3] = true } else { conditions[3].style.background = 'rgb(255,239,208)'; strength[3] = false }
 					if (strength[0] && strength[1] && strength[2] && strength[3]) {
-						document.querySelector('.page9 .topbubble').innerHTML = 'Unhackable!'
+						document.querySelector('.page9 .topbubble').innerHTML = 'Tidak bisa diretas!'
 						next.style.display = 'flex'
 					} else {
-						document.querySelector('.page9 .topbubble').innerHTML = 'Not strong enough yet.'
+						document.querySelector('.page9 .topbubble').innerHTML = 'Kata sandi masih belum cukup kuat.'
 						next.style.display = 'none'
 					}
 				})
@@ -635,7 +634,7 @@ function download_cert() {
         var img = new Image()
         img.src = dataUrl
         let link = document.createElement('a')
-        link.download = 'Squad Leader Cerrificate.png'
+        link.download = 'Sertifikat Pemimpin Tim.png'
         link.href = dataUrl
         link.click()
 		document.querySelector('.cert').style.transform = `scale(${getScale()})`
