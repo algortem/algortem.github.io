@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="img_downloader.css">
+</head>
+<body>
+<div class="container">
+    <div class="left">Backgrounds</div>
+    <div class="right">
+        <div class="item bg"></div>
+        <div class="item bg"></div>
+        <div class="item bg"></div>
+        <div class="item bg"></div>
+        <div class="item bg"></div>
+        <div class="item bg"></div>
+        <div class="item bg"></div>
+        <div class="item bg"></div>
+    </div>
+    <div class="left">Objects</div>
+    <div class="right">
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+        <div class="item obj"></div>
+    </div>
+    <div class="left">Naruto characters</div>
+    <div class="right">
+        <div class="item nar"></div>
+        <div class="item nar"></div>
+        <div class="item nar"></div>
+        <div class="item nar"></div>
+    </div>
+</div>
+<script>
+/**
+ * Извлекает URL из background-image: url("...").
+ */
+ function getBgUrl(el) {
+    const bg = getComputedStyle(el).backgroundImage;
+    const match = bg && bg.match(/url\(["']?(.*?)["']?\)/);
+    return match ? match[1] : null;
+}
+
+/**
+ * Скачивает файл по URL (если возможно), иначе открывает в новой вкладке.
+ */
+async function downloadImage(url, filename = 'image') {
+    try {
+        const response = await fetch(url, {mode: 'cors'});
+        if (!response.ok) throw new Error('fetch failed');
+        const blob = await response.blob();
+
+        const ext = blob.type.split('/')[1] || 'png';
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `${filename}.${ext}`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(a.href);
+    } catch (e) {
+        console.warn('Не удалось скачать через fetch:', e);
+        window.open(url, '_blank');
+    }
+}
+
+/**
+ * Навешиваем обработчик клика на все .item
+ */
+document.querySelectorAll('.item').forEach((item, index) => {
+    item.addEventListener('click', async () => {
+        const url = getBgUrl(item);
+        if (!url) {
+            alert('У этого блока нет фонового изображения');
+            return;
+        }
+        const name = `background_${index + 1}`;
+        await downloadImage(url, name);
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,246 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+}
+
+.container {
+    padding: 3em;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: auto;
+}
+
+.left {
+    font-size: 2em;
+    padding-right: 1em;
+    padding-top: 1em;
+    box-sizing: border-box;
+    text-align: right;
+    border-bottom: 1px solid rgb(255, 225, 168);
+}
+
+.right {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 2px;
+    padding-bottom: 1.5em;
+    padding-top: 1.5em;
+    border-bottom: 1px solid rgb(255, 225, 168);
+}
+
+.right * {
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+
+.right .item {
+    width: 250px;
+    height: 250px;
+    background: black;
+    transition: transform .1s linear;
+    cursor: pointer;
+}
+
+.bg {
+    width: 333px !important;
+    height: 250px;
+}
+
+.right .item:hover {
+    transform: scale(0.97);
+    transition: transform .1s linear;
+}
+
+.right .item:active {
+    transform: scale(0.94);
+    transition: transform .1s linear;
+}
+
+
+
+.right .bg:nth-of-type(1) {
+    background: url(images/bg/bg2.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.right .bg:nth-of-type(2) {
+    background: url(images/bg/bg3.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.right .bg:nth-of-type(3) {
+    background: url(images/bg/bg4.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.right .bg:nth-of-type(4) {
+    background: url(images/bg/bg5.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.right .bg:nth-of-type(5) {
+    background: url(images/bg/bg6.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.right .bg:nth-of-type(6) {
+    background: url(images/bg/bg7.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.right .bg:nth-of-type(7) {
+    background: url(images/bg/bg8.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.right .bg:nth-of-type(8) {
+    background: url(images/bg/bg9.png);
+    background-size: cover;
+    background-position: center;
+}
+
+
+
+
+
+.right .obj:nth-of-type(1) {
+    background: url(images/objects/basketball.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(2) {
+    background: url(images/objects/bicycle.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(3) {
+    background: url(images/objects/book.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(4) {
+    background: url(images/objects/camera.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(5) {
+    background: url(images/objects/cat.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(6) {
+    background: url(images/objects/dog.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(7) {
+    background: url(images/objects/football.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(8) {
+    background: url(images/objects/guitar.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(9) {
+    background: url(images/objects/jumping_rope.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(10) {
+    background: url(images/objects/laptop.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(11) {
+    background: url(images/objects/microphone.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(12) {
+    background: url(images/objects/ping-pong.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(13) {
+    background: url(images/objects/rice.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.right .obj:nth-of-type(14) {
+    background: url(images/objects/skateboard.png);
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+
+
+.right .nar:nth-of-type(1) {
+    background: url(images/naruto/Hinata.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.right .nar:nth-of-type(2) {
+    background: url(images/naruto/naruto1.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.right .nar:nth-of-type(3) {
+    background: url(images/naruto/Naruto2.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
+
+.right .nar:nth-of-type(4) {
+    background: url(images/naruto/Sakura.png);
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: top center;
+}
