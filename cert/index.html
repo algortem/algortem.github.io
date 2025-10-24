@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="cert.css">
 </head>
 <body>
+    <div class="newcert">Lisensi baru</div>
     <div class="page page12">
         <div class="cert">
             <img class="cert-bg" src="cert_bg.png" alt="">
@@ -23,8 +24,14 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
     <script>
-let student_name = prompt("Student's name")
-document.querySelector('.student-name').innerHTML = student_name
+let student_name
+function getName() {
+    student_name = prompt("Nama siswa")
+    document.querySelector('.student-name').innerHTML = student_name
+}
+
+document.querySelector('.newcert').addEventListener('click', getName )
+
 
 let cert = document.querySelector('.page12 .cert')
 cert.style.transform = `scale(${getScale()})`
@@ -34,6 +41,7 @@ function getScale() {
 	let toScale = 0.9 * window.innerHeight / parseInt(certStyles.height)
 	return toScale
 }
+
 function download_cert() {
     document.querySelector('.cert').style.transform = `none`
     domtoimage.toPng(document.querySelector('.cert'), {quality: 1})
@@ -41,7 +49,7 @@ function download_cert() {
         var img = new Image()
         img.src = dataUrl
         let link = document.createElement('a')
-        link.download = 'Squad Leader Cerrificate.png'
+        link.download = `${student_name} licence.png`
         link.href = dataUrl
         link.click()
         document.querySelector('.cert').style.transform = `scale(${getScale()})`
@@ -49,12 +57,11 @@ function download_cert() {
     .catch(function (error) {
         console.error('oops, something went wrong!', error);
     })
-    document.querySelector('.cert').removeEventListener('click', download_cert)
     
 }
-document.fonts.ready.then(() => {
-    document.querySelector('.cert').addEventListener('click', download_cert)
-})
+
+document.querySelector('.cert').addEventListener('click', download_cert)
+
 </script>
 </body>
 </html>
