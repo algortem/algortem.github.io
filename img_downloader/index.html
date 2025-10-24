@@ -92,7 +92,7 @@ document.querySelectorAll('.item').forEach((item, index) => {
             return;
         }
         const name = `background_${index + 1}`;
-        await downloadImage(url, name);
+        await downloadImage(url, url.split('/').at(-1).split('.').at(-2));
     });
 });
 </script>
