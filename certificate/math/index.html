@@ -8,21 +8,47 @@
 </head>
 <body>
     <div class="newcert">Lisensi baru</div>
+    <div class="editteacher">Ubah nama guru</div>
     <div class="page page12">
         <div class="cert">
             <img class="cert-bg" src="cert_bg.png" alt="">
-            <h2 class="licence">LISENSI DEVELOPER<br>PEMULA</h2>
-            <div class="given">DENGAN BANGGA DIBERIKAN KEPADA</div>
-            <div class="student-name">AL MUHAMMAD AL  IGN NNAIR</div>
-            <div class="for">ATAS PENYELESAIAN PROYEK PERTAMANYA DI SCRATCH</div>
-            <div class="info1">~ <span class="red">28 blok baru</span> dipelajari</div>
-            <div class="sep sep1"></div>
-            <div class="info2">~ <span class="pink">12% dari kursus</span> telah diselesaikan</div>
-            <div class="sep sep2"></div>
-            <div class="info3">~ <span class="green">43 level</span> terselesaikan <span class="green">di platform</span></div>
+            <h1 class="student-name"></h1>
+            <div class="footer">
+                <div class="teacher-name-group">
+                    <div class="mentor">Mentor:&nbsp;</div>
+                    <div class="name"></div>
+                </div>
+                <div class="year">2025</div>
+            </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+<script>
+function getCookieValue(name) {
+  const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+let teacher_name
+
+if (document.cookie.includes("math_teacher_name=")) {
+    teacher_name = getCookieValue('math_teacher_name')
+} else {
+    teacher_name = prompt("Siapa nama Anda? (nama guru)")
+    document.cookie = `math_teacher_name=${teacher_name}; max-age=86400; path=/`;
+}
+
+document.querySelector('.name').innerHTML = teacher_name
+
+
+
+
+document.querySelector('.editteacher').addEventListener('click', function() {
+    teacher_name = prompt("Siapa nama Anda? (nama guru)")
+    document.cookie = `math_teacher_name=${teacher_name}; max-age=86400; path=/`;
+    document.querySelector('.name').innerHTML = teacher_name
+})
+</script>
     <script>
 let student_name
 function getName() {
@@ -31,7 +57,6 @@ function getName() {
 }
 
 document.querySelector('.newcert').addEventListener('click', getName )
-
 
 let cert = document.querySelector('.page12 .cert')
 cert.style.transform = `scale(${getScale()})`
@@ -49,7 +74,7 @@ function download_cert() {
         var img = new Image()
         img.src = dataUrl
         let link = document.createElement('a')
-        link.download = `${student_name} licence.png`
+        link.download = `${student_name} - Sertifikat Pahlawan Anggaran.png`
         link.href = dataUrl
         link.click()
         document.querySelector('.cert').style.transform = `scale(${getScale()})`
@@ -57,7 +82,6 @@ function download_cert() {
     .catch(function (error) {
         console.error('oops, something went wrong!', error);
     })
-    
 }
 
 document.querySelector('.cert').addEventListener('click', download_cert)
