@@ -7,7 +7,8 @@
 	<link rel="stylesheet" href="style.css">
 	<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body onload="startGame()">
+<!-- <body onload="startGame()"> -->
+<body>
 <div class="page page0">
 	<div class="info">
 		<h1></h1>
@@ -39,7 +40,7 @@
 	<script>
 		document.querySelector('.page0 .continue').addEventListener('click', function() {
 			student_name = document.querySelector('.page0 input').value
-			saveName(student_name)
+			// saveName(student_name)
 			document.querySelectorAll('.student-name').forEach(el => {el.textContent = student_name})
 			document.querySelector('.next').style.display = 'flex'
 			document.querySelector('.next').click()
@@ -484,32 +485,32 @@ next.addEventListener('click', () => {
 				animatebg(pages[current_page])
 			} else if (current_page == 2) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				animatebg(pages[current_page])
 				animateBubbles(pages[current_page])
 			} else if (current_page == 3) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				animateBubbles(pages[current_page])
 			} else if (current_page == 4) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				animatebg(pages[current_page])
 				animateBubbles(pages[current_page])
 				next.style.display = 'none'
 			} else if (current_page == 5) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				animateBubbles(pages[current_page])
 				next.style.display = 'none'
 			} else if (current_page == 6) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				next.style.display = 'none'
 				animateBubbles(pages[current_page])
 			} else if (current_page == 7) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				next.style.display = 'none'
 				animateBubbles(pages[current_page])
 				pages[current_page].querySelector('.test').animate([
@@ -547,11 +548,11 @@ next.addEventListener('click', () => {
 				})
 			} else if (current_page == 8) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				animateBubbles(pages[current_page])
 			} else if (current_page == 9) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				next.style.display = 'none'
 				// animateBubbles(pages[current_page])
 				let input = pages[current_page].querySelector('input')
@@ -596,17 +597,17 @@ next.addEventListener('click', () => {
 				})
 			} else if (current_page == 10) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				animateBubbles(pages[current_page])
 				next.style.display = 'flex'
 			} else if (current_page == 11) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				animateBubbles(pages[current_page])
 				next.style.display = 'flex'
 			} else if (current_page == 12) {
 				page_end = new Date().getTime()
-				saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
+				// saveSceneTime(current_page-1, page_end - page_start).then(page_start = page_end)
 				next.style.display = 'none'
 				let cert = document.querySelector('.page12 .cert')
 				cert.appendChild(document.querySelector('.page11 .field'))
@@ -647,7 +648,7 @@ function download_cert() {
 }
 document.querySelector('.cert').addEventListener('click', download_cert)
 </script>
-<script>
+<!-- <script>
 	const SUPABASE_URL = 'https://kgafasppmzkhrrlrhfvh.supabase.co'
 	const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtnYWZhc3BwbXpraHJybHJoZnZoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTk5OTkwMzEsImV4cCI6MjA3NTU3NTAzMX0.lbly5vQvUkpW12tjbeU-xnB30XAh62Wnraf7WkZLwFw'
 	const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
@@ -684,6 +685,6 @@ document.querySelector('.cert').addEventListener('click', download_cert)
 		  if (error) console.error('Error:', error);
 		  else console.log('Saved:', data);
 	}
-</script>
+</script> -->
 </body>
 </html>
