@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Урок</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="achievement-badge" class="achievement gray">
+    Схватываешь на лету
+  </div>
+  <div id="achievement-practice" class="achievement gray practice-badge">
+    Решала
+  </div>
+  
+
+<div id="progress">
+  <div id="progress-bar"></div>
+</div>
+
+<div id="practice-header-progress" class="hidden">
+  Практика: <span id="practice-progress-text"></span>
+</div>
+
+
+<h1 id="lesson-title"></h1>
+
+<div id="content"></div>
+
+<div id="hint-popup" class="hidden">
+  <div class="popup">
+    <p id="hint-text"></p>
+    <button id="close-hint">Понятно</button>
+  </div>
+</div>
+
+<script src="lessons/lesson1.js"></script>
+<script src="engine.js"></script>
+</body>
+</html>
