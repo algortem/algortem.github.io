@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<title>Toko Longevity</title>
+
+<style>
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #1c1c1e;
+  --muted: #8e8e93;
+  --accent: #3bbfa3;
+  --accent-soft: #e6f6f2;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.phone {
+  position: relative;
+  height: 80vh;
+  aspect-ratio: 9 / 19.5;
+  background: var(--bg);
+  border-radius: 34px;
+  box-shadow: 0 25px 60px rgba(0,0,0,.18);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  background: var(--card);
+  border-bottom: 1px solid #eee;
+}
+
+main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px;
+}
+
+nav {
+  display: flex;
+  background: var(--card);
+  border-top: 1px solid #eee;
+}
+
+nav button {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  background: none;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+nav button.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.row {
+  margin-bottom: 22px;
+}
+
+.row h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.horizontal {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+}
+
+.card {
+  min-width: 130px;
+  background: var(--card);
+  border-radius: 14px;
+  padding: 10px;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  cursor: pointer;
+  transition: transform .15s ease;
+  margin-top: 8px;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+}
+
+.card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 6px;
+}
+
+.card .name {
+  font-size: 12px;
+}
+
+.card .price {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  flex-direction: column;
+}
+
+.filters select,
+.filters input {
+  font-size: 12px;
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.frow1 {
+    display: flex;
+    width: 100%;
+}
+
+.frow2 {
+    box-sizing: border-box;
+}
+
+.frow2 input {
+    box-sizing: border-box;
+    width: 50%;
+}
+
+.product-page {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+  display: none;
+  flex-direction: column;
+  animation: slideIn .25s ease;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.product-content {
+  padding: 14px;
+  overflow-y: auto;
+}
+
+.product-content img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.product-content h3 {
+  font-size: 15px;
+  margin: 6px 0;
+}
+
+.product-content p {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.product-content button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: none;
+  font-size: 13px;
+}
+
+.like-btn {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.add-btn {
+  background: var(--accent);
+  color: white;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.cart-item {
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.cart-item.free {
+  text-decoration: line-through;
+  opacity: .45;
+}
+
+.promo-btn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 14px;
+  border: none;
+  background: var(--accent);
+  color: white;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="phone">
+
+  <header id="title">Promosi</header>
+
+  <main id="app"></main>
+
+  <nav>
+    <button onclick="go('promotions')" class="active">Promosi</button>
+    <button onclick="go('catalog')">Katalog</button>
+    <button onclick="go('cart')">Keranjang</button>
+  </nav>
+
+  <div class="product-page" id="productPage">
+    <header>
+      <button class="back-btn" onclick="closeProduct()">← Kembali</button>
+    </header>
+    <div class="product-content" id="productContent"></div>
+  </div>
+
+</div>
+
+<script>
+const img = q => `../images/${q}`;
+
+const products = [
+  {id:1,name:"Permen buah gummy",category:"sweet",price:200,desc:"Permen buah kenyal",weight:150,likes:120,image:img("gummy-bears.png")},
+  {id:2,name:"Jus cranberry",category:"sweet",price:140,desc:"Jus beri",weight:500,likes:90,image:img("cranberry-juice.png")},
+  {id:3,name:"Campuran salad",category:"green",price:120,desc:"Sayuran segar",weight:200,likes:80,image:img("salad-mix.png")},
+  {id:4,name:"Bawang & peterseli",category:"green",price:80,desc:"Sayuran hemat",weight:180,likes:60,image:img("green-onion.png")},
+  {id:5,name:"Ubi jalar",category:"other",price:90,desc:"Umbi sehat",weight:300,likes:50,image:img("sweet-potato.png")},
+  {id:6,name:"Susu 1l",category:"sweet",price:70,desc:"Susu segar",weight:1000,likes:110,image:img("milk.png")},
+  {id:7,name:"Kue kismis",category:"sweet",price:95,desc:"Kue kering",weight:250,likes:105,image:img("raisin-cookies.png")},
+  {id:8,name:"Persik",category:"sweet",price:130,desc:"Persik segar",weight:400,likes:98,image:img("peaches.png")},
+  {id:9,name:"Deterjen pakaian",category:"household",price:220,desc:"Pembersih",weight:1000,likes:85,image:img("detergent.png")},
+  {id:10,name:"Sikat sepatu",category:"household",price:60,desc:"Sikat",weight:120,likes:70,image:img("brush.png")},
+  {id:11,name:"Almond",category:"sweet",price:180,desc:"Kacang panggang",weight:200,likes:95,image:img("almonds.png")},
+  {id:12,name:"Selai stroberi",category:"sweet",price:150,desc:"Selai buah",weight:300,likes:88,image:img("strawberry-jam.png")},
+  {id:13,name:"Brokoli",category:"green",price:110,desc:"Brokoli segar",weight:250,likes:76,image:img("broccoli.png")},
+  {id:14,name:"Bayam",category:"green",price:100,desc:"Sayuran daun",weight:200,likes:82,image:img("spinach.png")},
+  {id:15,name:"Wortel",category:"green",price:90,desc:"Wortel organik",weight:300,likes:70,image:img("carrots.png")},
+  {id:16,name:"Roti gandum cokelat",category:"other",price:80,desc:"Roti gandum utuh",weight:400,likes:65,image:img("bread.png")},
+  {id:17,name:"Keju blok",category:"sweet",price:250,desc:"Keju susu",weight:350,likes:120,image:img("cheese.png")},
+  {id:18,name:"Yogurt 500ml",category:"sweet",price:90,desc:"Yogurt alami",weight:500,likes:95,image:img("yoghurt.png")},
+  {id:19,name:"Apel",category:"sweet",price:60,desc:"Apel segar",weight:200,likes:85,image:img("apples.png")},
+  {id:20,name:"Pisang",category:"sweet",price:70,desc:"Pisang matang",weight:180,likes:90,image:img("bananas.png")},
+  {id:21,name:"Tomat",category:"green",price:80,desc:"Tomat berair",weight:250,likes:75,image:img("tomatoes.png")},
+  {id:22,name:"Mentimun",category:"green",price:65,desc:"Mentimun segar",weight:300,likes:68,image:img("cucumbers.png")},
+  {id:23,name:"Minyak zaitun",category:"other",price:400,desc:"Extra virgin",weight:500,likes:110,image:img("olive-oil.png")},
+  {id:24,name:"Beras 1kg",category:"other",price:120,desc:"Beras butir panjang",weight:1000,likes:90,image:img("rice.png")},
+  {id:25,name:"Pasta",category:"other",price:110,desc:"Pasta Italia",weight:500,likes:88,image:img("pasta.png")},
+  {id:26,name:"Saus tomat",category:"other",price:95,desc:"Saus tomat kaya rasa",weight:350,likes:82,image:img("tomato-sauce.png")},
+  {id:27,name:"Sabun cuci piring",category:"household",price:60,desc:"Membersihkan piring",weight:500,likes:70,image:img("dish-soap.png")},
+  {id:28,name:"Spons",category:"household",price:30,desc:"Spons pembersih",weight:100,likes:65,image:img("sponges.png")},
+  {id:29,name:"Tisu toilet",category:"household",price:120,desc:"Tisu lembut",weight:800,likes:95,image:img("toilet-paper.png")},
+  {id:30,name:"Kantong sampah",category:"household",price:80,desc:"Kantong sampah",weight:500,likes:60,image:img("garbage-bags.png")}
+];
+
+
+while(products.length < 30){
+  const cats=["green","sweet","household","other"];
+  const c=cats[Math.floor(Math.random()*4)];
+  products.push({
+    id:products.length+1,
+    name:"Produk "+(products.length+1),
+    category:c,
+    price:Math.floor(Math.random()*180)+40,
+    desc:"Deskripsi produk",
+    weight:Math.floor(Math.random()*400)+100,
+    likes:Math.floor(Math.random()*100),
+    image:img(c)
+  });
+}
+
+let page="promotions", cart=[], freeIds=[];
+
+function go(p){
+  page=p;
+  document.querySelectorAll("nav button").forEach(b=>b.classList.remove("active"));
+  event.target.classList.add("active");
+  render();
+}
+
+function render(){
+  title.textContent = page[0].toUpperCase()+page.slice(1);
+  if(page==="promotions") promotions();
+  if(page==="catalog") catalog();
+  if(page==="cart") cartPage();
+}
+
+const card = p => `
+<div class="card" onclick="openProduct(${p.id})">
+  <img src="${p.image}">
+  <div class="name">${p.name}</div>
+  <div class="price">${p.price} koin</div>
+</div>`;
+
+const row = (t, arr) => `
+<div class="row">
+  <h3>${t}</h3>
+  <div class="horizontal">${arr.map(card).join("")}</div>
+</div>`;
+
+function promotions(){
+  const randomSample = (arr, n) => {
+    const copy = [...arr];
+    const res = [];
+    while(res.length < n && copy.length > 0){
+      const i = Math.floor(Math.random()*copy.length);
+      res.push(copy.splice(i,1)[0]);
+    }
+    return res;
+  }
+
+  app.innerHTML =
+    row("Populer", [...products].sort((a,b)=>b.likes-a.likes).slice(0,6)) +
+    row("Promo Sayuran", randomSample(products.filter(p=>p.category==="green"),3)) +
+    row("Promo Manis", randomSample(products.filter(p=>p.category==="sweet"),3)) +
+    row("Promo Rumah Tangga", randomSample(products.filter(p=>p.category==="household"),3));
+}
+
+function catalog(){
+  app.innerHTML = `
+  <div class="filters">
+    <div class="frow1" style="margin-bottom:4px;">
+      <select id="cat" onchange="applyFilters()" style="width:100%;">
+        <option value="all">Semua</option>
+        <option value="green">Sayuran</option>
+        <option value="sweet">Manis</option>
+        <option value="household">Rumah tangga</option>
+        <option value="other">Lainnya</option>
+      </select>
+    </div>
+    <div class="frow2" style="display:flex; gap:8px;">
+      <input type="number" id="min" placeholder="Min" oninput="applyFilters()" style="flex:1;">
+      <input type="number" id="max" placeholder="Maks" oninput="applyFilters()" style="flex:1;">
+    </div>
+  </div>
+  <div id="catalogItems">
+    ${products.map(card).join("")}
+  </div>`;
+}
+
+function applyFilters(){
+  const cat = document.getElementById("cat").value;
+  const min = parseInt(document.getElementById("min").value) || 0;
+  const max = parseInt(document.getElementById("max").value) || Infinity;
+
+  let filtered = products.filter(p => p.price >= min && p.price <= max);
+  if(cat !== "all") filtered = filtered.filter(p => p.category === cat);
+
+  document.getElementById("catalogItems").innerHTML = filtered.map(card).join("");
+}
+
+function cartPage(){
+  if(cart.length === 0){
+    app.innerHTML = `<p style="text-align:center; color: var(--muted); margin-top:20px;">Keranjang kosong</p>`;
+    return;
+  }
+
+  const itemsHTML = cart.map(p => `
+    <div class="cart-item-card ${freeIds.includes(p.id) ? 'free' : ''}" style="display:flex; align-items:center; margin-bottom:10px; padding:10px; background:${freeIds.includes(p.id)?'#e6f6f2':'#fff'}; border-radius:12px; box-shadow:0 3px 8px rgba(0,0,0,.05);">
+      <img src="${p.image}" style="width:50px; height:50px; border-radius:10px; object-fit:cover; margin-right:10px;">
+      <div style="flex:1;">
+        <div style="font-size:13px; font-weight:600;">${p.name}</div>
+        <div style="font-size:12px; color:var(--muted);">${p.category}</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:13px; font-weight:600; ${freeIds.includes(p.id)?'text-decoration: line-through; opacity:0.5':''}">${p.price} koin</div>
+        <button onclick="removeFromCart(${p.id})" style="margin-top:4px; font-size:11px; background:none; border:none; color:red; cursor:pointer;">Hapus</button>
+      </div>
+    </div>
+  `).join("");
+
+  const total = cart.reduce((sum,p)=>sum + (freeIds.includes(p.id)?0:p.price), 0);
+
+  const promoBtnHTML = cart.length>=3 
+    ? `<button class="promo-btn" onclick="promo()">Terapkan 1+1=3</button>` 
+    : "";
+
+  app.innerHTML = `
+    ${itemsHTML}
+    ${promoBtnHTML}
+    <div style="margin-top:12px; font-weight:600; font-size:14px; text-align:right;">Total: ${total} koin</div>
+  `;
+}
+
+function removeFromCart(id){
+  cart = cart.filter(p=>p.id!==id);
+  freeIds = freeIds.filter(fid => fid !== id);
+  cartPage();
+}
+
+function openProduct(id){
+  const p = products.find(x => x.id === id);
+  productPage.style.display = "flex";
+
+  productContent.innerHTML = `
+    <img src="${p.image}">
+    <h3>${p.name}</h3>
+    <p>${p.desc}</p>
+    <p>${p.weight}g · ${p.likes} suka</p>
+    <button class="like-btn">Suka</button>
+    <button class="add-btn">Tambah ke keranjang</button>
+  `;
+
+  const likeBtn = productContent.querySelector(".like-btn");
+  const addBtn = productContent.querySelector(".add-btn");
+
+  likeBtn.onclick = () => {
+    p.likes++;
+    render();
+    openProduct(id);
+  };
+
+  addBtn.onclick = () => {
+    cart.push(p);
+    render();
+    cartPage();
+  };
+}
+
+function closeProduct(){
+  productPage.style.display="none";
+  render()
+}
+
+function promo(){
+  if(cart.length < 3) return;
+  const sorted = [...cart].sort((a,b)=>a.price-b.price);
+  freeIds = [sorted[0].id, sorted[1].id];
+  cartPage();
+}
+
+render();
+</script>
+
+</body>
+</html>
