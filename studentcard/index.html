@@ -969,6 +969,44 @@
     <p>Дело не в дисциплине заполнения, а в том, что на Math Tutoring карточка — это принципиально другой инструмент.</p>
     <p>Основную ценность карточки составляет <strong>академический портрет студента</strong>: обратная связь преподавателя о сильных зонах, зонах роста и мотиваторах ребёнка. Это знание, которого у ISM до карточки не было ни в каком виде — оно возникает только потому, что преподаватель его сформулировал. На MT этого блока нет по устройству курса: вместо него в карточку подтягиваются системные данные один к одному — то, что ISM и так видит в своих интерфейсах.</p>
     <p>То есть на MT вмешательства, которое мы проверяем, по сути не существует: карточка там не создаёт нового знания о студенте, а перекладывает уже имеющееся.</p>
+
+    <h3>С Math Tutoring · все курсы</h3>
+    <figure>
+      <div class="ftitle">Retention pure по месяцам · с Math Tutoring</div>
+      <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
+      <svg id="c-mt-all-ret3" viewBox="0 0 700 300"></svg>
+    </figure>
+    <div class="pair">
+      <figure>
+        <div class="ftitle">Retention · июль · с Math Tutoring</div>
+        <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
+        <svg id="c-mt-all-jul-ret" viewBox="0 0 700 300"></svg>
+      </figure>
+      <figure>
+        <div class="ftitle">Экономика · июль · с Math Tutoring</div>
+        <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
+        <svg id="c-mt-all-jul-money" viewBox="0 0 700 300"></svg>
+      </figure>
+    </div>
+
+    <h3>Только Math Tutoring</h3>
+    <figure>
+      <div class="ftitle">Retention pure по месяцам · только Math Tutoring</div>
+      <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
+      <svg id="c-mt-only-ret3" viewBox="0 0 700 300"></svg>
+    </figure>
+    <div class="pair">
+      <figure>
+        <div class="ftitle">Retention · июль · только Math Tutoring</div>
+        <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
+        <svg id="c-mt-only-jul-ret" viewBox="0 0 700 300"></svg>
+      </figure>
+      <figure>
+        <div class="ftitle">Экономика · июль · только Math Tutoring</div>
+        <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
+        <svg id="c-mt-only-jul-money" viewBox="0 0 700 300"></svg>
+      </figure>
+    </div>
   </section>
 
   <footer>Student Card · внутренний отчёт · данные июнь–июль 2026</footer>
@@ -1133,6 +1171,12 @@ function buildSlopes(containerId,items){
 }
 lineChart('c-jj-ret',[29.1,40.5],[26.6,29.6],['Июнь','Июль'],20,46,'%');
 lineChart('c-jj-aov',[4.16,3.81],[3.84,3.86],['Июнь','Июль'],3.6,4.4,'');
+lineChart('c-mt-all-ret3',[37.9,26.8,38.4],[35.3,24.5,28.3],['Май','Июнь','Июль'],20,42,'%');
+groupBars('c-mt-all-jul-ret',[{label:'retention raw',t:23.7,c:19.1},{label:'retention pure',t:38.4,c:28.3}],45,1,'');
+groupBars('c-mt-all-jul-money',[{label:'AOV',t:4.10,c:4.05},{label:'revenue/lead',t:1.58,c:1.08}],5,2,'');
+lineChart('c-mt-only-ret3',[25.0,18.6,29.8],[21.6,17.6,25.8],['Май','Июнь','Июль'],12,34,'%');
+groupBars('c-mt-only-jul-ret',[{label:'retention raw',t:23.7,c:21.1},{label:'retention pure',t:29.8,c:25.8}],35,1,'');
+groupBars('c-mt-only-jul-money',[{label:'AOV',t:5.68,c:4.54},{label:'revenue/lead',t:1.69,c:1.09}],6.5,2,'');
 // ---- TOC scroll spy ----
 (function(){
   const links=[...document.querySelectorAll('.toc a')];
