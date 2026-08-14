@@ -60,10 +60,14 @@
 
   /* ---- sections ---- */
   section{padding:38px 0;border-bottom:1px solid var(--line)}
-  section h2{font-size:clamp(26px,4.5vw,36px);margin:0 0 .1em;display:flex;align-items:baseline;gap:14px}
+  section h2{font-size:clamp(27px,4.2vw,33px);margin:0 0 .1em;display:flex;align-items:baseline;gap:14px}
   section h2 .idx{font-family:var(--mono);font-size:15px;font-weight:500;color:var(--test);letter-spacing:0}
   .sub{color:var(--muted);font-size:16px;margin:-2px 0 22px}
-  h3{font-size:20px;margin:26px 0 .4em}
+  h3{font-size:24px;margin:32px 0 .45em}
+  h4{font-family:var(--disp);font-weight:600;font-size:19px;margin:26px 0 .45em;letter-spacing:-.005em}
+  h2+h3{margin-top:.75em}
+  h3+h4{margin-top:.5em}
+  h3:first-child,h4:first-child{margin-top:0}
   .lead-in{font-size:19px;line-height:1.6}
 
   /* ---- stat cards ---- */
@@ -75,7 +79,7 @@
   @media(max-width:620px){.stats{grid-template-columns:1fr}}
 
   /* ---- overview result ---- */
-  .metrics{display:flex;flex-direction:column;gap:2px;margin:6px 0 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .metrics{display:flex;flex-direction:column;gap:2px;margin:14px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
   .mrow{display:flex;gap:16px;align-items:baseline;padding:15px 18px;background:var(--card);border-bottom:1px solid var(--line)}
   .mrow:last-child{border-bottom:none}
   .mtag{flex:0 0 96px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint);padding-top:2px}
@@ -83,8 +87,74 @@
   .mrow div{font-size:15.5px;line-height:1.5}
   .mrow b{font-weight:600}
   .glossary{color:var(--faint);font-style:italic;border:1px dashed var(--line2);border-radius:10px;padding:16px 18px;margin:6px 0 0}
-  .reslabel{font-family:var(--disp);font-weight:600;font-size:clamp(20px,3.2vw,26px);line-height:1.2;margin:2px 0 18px;letter-spacing:-.01em}
+
+  /* ---- metric definition table ---- */
+  .mtable{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:6px 0 0}
+  .mtable th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--faint);font-weight:500;text-align:left;padding:11px 16px;background:var(--wash);border-bottom:1px solid var(--line)}
+  .mtable td{padding:14px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+  .mtable tr:last-child td{border-bottom:none}
+  .mtable .mname{font-family:var(--mono);font-weight:600;font-size:14px;color:var(--ink);white-space:nowrap;width:1%}
+  .mtable .mdesc{font-size:14.5px;color:var(--muted);line-height:1.5}
+  .mtable .mexp{width:30%}
+  .mtable tr.pri td{background:#F7FAFE}
+  .mtable tr.pri .mname{color:var(--test)}
+  .mtable tr.pri .mdesc{color:var(--ink)}
+  .mtable tr.pri td:first-child{box-shadow:inset 3px 0 0 var(--test)}
+  .exp-y{font-family:var(--mono);font-weight:600;font-size:14px;color:var(--test);line-height:1.35;display:block}
+  .exp-n{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--faint);line-height:1.4;display:block}
+  @media(max-width:680px){
+    .mtable thead{display:none}
+    .mtable,.mtable tbody,.mtable tr,.mtable td{display:block;width:auto}
+    .mtable tr{border-bottom:1px solid var(--line);padding:10px 0}
+    .mtable tr:last-child{border-bottom:none}
+    .mtable td{border-bottom:none;padding:3px 16px}
+    .mtable .mname{width:auto}
+    .mtable .mexp{width:auto;padding-top:7px}
+    .mtable tr.pri td:first-child{box-shadow:none}
+    .mtable tr.pri{box-shadow:inset 3px 0 0 var(--test);background:#F7FAFE}
+  }
+
+  /* ---- compact timeline strip ---- */
+  .tline{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);
+    border-radius:12px;overflow:hidden;background:var(--card);margin:14px 0 8px}
+  .tline .ti{padding:14px 16px;border-right:1px solid var(--line)}
+  .tline .ti:last-child{border-right:none}
+  .tline .tm{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .tline .th2{font-family:var(--disp);font-weight:600;font-size:15.5px;margin:4px 0 3px}
+  .tline .tx{font-size:13.5px;color:var(--muted);line-height:1.4}
+  .tline .ti.now{background:#F7FAFE;box-shadow:inset 0 -3px 0 var(--test)}
+  .tline .ti.now .tm{color:var(--test)}
+  @media(max-width:620px){.tline{grid-template-columns:1fr}
+    .tline .ti{border-right:none;border-bottom:1px solid var(--line)}
+    .tline .ti:last-child{border-bottom:none}}
+
+  /* ---- numbered steps ---- */
+  .steps{list-style:none;counter-reset:s;padding:0;margin:14px 0 8px;display:grid;gap:8px}
+  .steps li{counter-increment:s;position:relative;padding:13px 18px 13px 48px;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;font-size:15.5px;line-height:1.5}
+  .steps li::before{content:counter(s);position:absolute;left:17px;top:14px;font-family:var(--mono);
+    font-size:11.5px;font-weight:600;color:var(--test);width:19px;height:19px;line-height:19px;
+    text-align:center;background:#EAF1FD;border-radius:6px}
+  .steps li.out{background:var(--wash);border-color:var(--line2)}
+  .steps li.out::before{content:'=';color:var(--muted);background:#E4E0D8}
+
+  /* ---- verdict cards ---- */
+  .vlist{display:grid;gap:12px;margin:10px 0 4px}
+  .vcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+  .vcard.key{border-color:#CFE0FA;box-shadow:inset 3px 0 0 var(--test)}
+  .vcard .vm{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .vcard.key .vm{color:var(--test)}
+  .vcard .vh{font-family:var(--disp);font-weight:600;font-size:17.5px;margin:5px 0 9px;line-height:1.25}
+  .vcard ul{margin:0;padding-left:20px;font-size:15px;color:var(--muted);line-height:1.5}
+  .vcard li{margin:3px 0}
+  .vcard b{color:var(--ink);font-weight:600}
+  .months.two{grid-template-columns:1fr 1fr}
+  @media(max-width:620px){.months.two{grid-template-columns:1fr}}
+  .reslabel{font-weight:500;font-size:17px;line-height:1.55;margin:0 0 16px}
   .result{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:0 0 10px}
+  .result.three{grid-template-columns:repeat(3,1fr)}
   @media(max-width:620px){.result{grid-template-columns:1fr}}
   .rblock{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
   .rblock.primary{border-color:#CFE0FA;box-shadow:inset 3px 0 0 var(--test)}
@@ -122,6 +192,8 @@
   .dtable tr.gaprow td{border-top:1px solid var(--line2);border-bottom:none;color:var(--ink);font-weight:600}
   .dtable tr.gaprow td:first-child{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:500}
   .tcap{font-size:13px;color:var(--muted);line-height:1.5;margin:4px 0 0}
+  .mixstat{font-size:16px;margin:2px 0 10px}
+  .mixstat b{font-family:var(--mono);font-size:22px;color:var(--test);font-weight:600;margin-right:4px}
   details.perism{margin:12px 0 4px;border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:var(--card)}
   .perism-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
   @media(max-width:620px){.perism-grid{grid-template-columns:1fr}}
@@ -133,6 +205,7 @@
   details.perism .tw{margin:0;padding:10px 12px 12px}
   details.perism .dtable{font-size:12px}
   details.perism .dtable th,details.perism .dtable td{padding:5px 6px}
+  details.perism .dtable th{white-space:normal}
   @media(max-width:620px){details.perism{grid-template-columns:1fr}}
 
   /* ---- chart card ---- */
@@ -180,7 +253,13 @@
   <a href="#july" data-t="july">Июль — чистый месяц</a>
   <a href="#findings" data-t="findings">Выводы по цифрам</a>
   <a href="#guarantees" data-t="guarantees">Пруфы</a>
-  <a href="#conclusion" data-t="conclusion">Вывод</a>
+  <div class="toc-group">
+    <a href="#conclusion" data-t="conclusion">Вывод</a>
+    <a href="#cn-what" data-t="cn-what" class="sub">Что измерили</a>
+    <a href="#cn-limits" data-t="cn-limits" class="sub">Чего не доказывает</a>
+    <a href="#cn-dec" data-t="cn-dec" class="sub">Решение</a>
+    <a href="#cn-hyp" data-t="cn-hyp" class="sub">Гипотезы</a>
+  </div>
   <a href="#appendix" data-t="appendix">Приложение</a>
 </nav>
 
@@ -200,46 +279,114 @@
     <p>ISM, работающий с заполненной карточкой студента, продлевает лучше, чем ISM без неё. Целевой эффект — <strong>+5 п.п. и выше</strong> к продлению.</p>
 
     <h3 id="ov-met">Метрики</h3>
+    <table class="mtable">
+      <thead><tr><th>Метрика</th><th>Описание</th><th>Ожидание</th></tr></thead>
+      <tbody>
+        <tr class="pri">
+          <td class="mname">retention</td>
+          <td class="mdesc">Доля продлившихся. Считаем среднюю в каждой группе ISM, взвешивая по количеству лидов.</td>
+          <td class="mexp"><span class="exp-y">Прирост не меньше 5 п.п.</span></td>
+        </tr>
+        <tr>
+          <td class="mname">AOV</td>
+          <td class="mdesc">Средний чек.</td>
+          <td class="mexp"><span class="exp-n">Вторичная · без ожиданий</span></td>
+        </tr>
+        <tr>
+          <td class="mname">revenue/lead</td>
+          <td class="mdesc">Сколько денег приносит один лид в среднем.</td>
+          <td class="mexp"><span class="exp-n">Вторичная · без ожиданий</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="tcap">Единственное ожидание — по retention: именно на нём проверяется гипотеза. Остальные метрики следим, чтобы видеть, куда ушёл эффект, но целевых значений по ним не ставили.</p>
+
+    <h4>Термины в таблицах</h4>
     <div class="metrics">
-      <div class="mrow"><span class="mtag pri">Основная</span><div><b>Retention</b> — доля продлившихся. Следим в динамике «тест против контроля», как закладывали в дизайне теста.</div></div>
-      <div class="mrow"><span class="mtag">Вторичные</span><div><b>Средний чек (AOV)</b> и <b>выручка</b>.</div></div>
-      <div class="mrow"><span class="mtag">Производная</span><div><b>Выручка на лид</b> — сводит конверсию и чек в одно число.</div></div>
+      <div class="mrow"><span class="mtag">Валидность</span><div><b>Невалидный лид</b> — тот, кто в этом месяце до решения о продлении просто не дошёл: заморозил платежи, перенёс уроки, взял паузу. Классифицируем лидов так каждый месяц; больше всего невалидных пришлось на июнь.</div></div>
+      <div class="mrow"><span class="mtag pri">raw</span><div><b>retention raw</b> — доля продлившихся от <b>всех</b> лидов: невалидные тоже остаются в знаменателе.</div></div>
+      <div class="mrow"><span class="mtag pri">pure</span><div><b>retention pure</b> — доля продлившихся <b>только среди валидных</b> лидов, то есть среди тех, кто реально принимал решение.</div></div>
     </div>
+    <p class="tcap">Опорной метрикой берём retention pure: она отвечает на вопрос «убедили ли того, кого можно было убедить», и не зависит от того, сколько людей в этом месяце ушло в заморозку.</p>
 
     <h3>Дизайн эксперимента</h3>
-    <p>Разделили менеджеров на <strong>тестовую</strong> группу (работают с заполненной карточкой) и <strong>контрольную</strong> (без неё), выровняв группы на входе. Тест шёл три месяца: <strong>май</strong> — сырой пилот на 2 менеджерах ради обратной связи; <strong>июнь</strong> — первый полноценный, но сезонно нестабильный прогон; <strong>июль</strong> — чистый месяц, на который и опираемся. Считаем по лидам (pooled), без Math Tutoring. Подробности — в разделе «Как устроен тест».</p>
+    <div class="metrics">
+      <div class="mrow"><span class="mtag pri">Группы</span><div><b>Тест</b> — менеджеры, работающие с заполненной карточкой. <b>Контроль</b> — работают как обычно, без неё.</div></div>
+      <div class="mrow"><span class="mtag">Отбор</span><div>Группы <b>выровнены на входе</b> — по конверсии и среднему числу уроков, чтобы состав выборки в обеих группах был сопоставимым.</div></div>
+      <div class="mrow"><span class="mtag">Подсчёт</span><div>По лидам (pooled), <b>без Math Tutoring</b>. Почему выносим этот курс и что меняется, если его вернуть, — <a href="#appendix">в приложении в конце страницы</a>.</div></div>
+      <div class="mrow"><span class="mtag">Длительность</span><div>Три месяца, из которых опорный — только последний.</div></div>
+    </div>
 
-    <h3 id="ov-res" style="margin-top:8px">Результат</h3>
-    <p class="reslabel">Основная метрика — retention. В июле тест выходит в заметный отрыв от контроля.</p>
+    <div class="tline">
+      <div class="ti"><div class="tm">Май</div><div class="th2">Сырой пилот</div><div class="tx">2 менеджера, ради обратной связи</div></div>
+      <div class="ti"><div class="tm">Июнь</div><div class="th2">Первый прогон</div><div class="tx">полный дизайн, но сезонно нестабильно</div></div>
+      <div class="ti now"><div class="tm">Июль</div><div class="th2">Чистый месяц</div><div class="tx">условия ровные — опираемся на него</div></div>
+    </div>
+
+    <h4>Как читаем эффект</h4>
+    <p>Сравнивать месяцы напрямую нельзя: каждый месяц — это другие клиенты и другой сезон, продления двигаются у всех сразу. Поэтому основной способ чтения — динамика, как и закладывали в дизайне теста.</p>
+    <div class="metrics">
+      <div class="mrow"><span class="mtag pri">Динамика</span><div>Насколько прирост теста от месяца к месяцу отличается от прироста контроля — это и есть <b>DiD</b>, разница приростов. Контроль здесь работает поправкой на всё общее: на сколько сдвинулся он, на столько же сдвинулся бы и тест без карточки, а остаток — вклад вмешательства. Переходов два: май→июнь и июнь→июль.</div></div>
+      <div class="mrow"><span class="mtag">Статика</span><div>Разрыв между тестом и контролем внутри одного месяца. В исходном дизайне этого способа не было — держим его как <b>дополнительную проверку</b> на чистом июле: если статика говорит то же, что динамика, вывод не висит на одной методике.</div></div>
+    </div>
+    <p>Вопрос, таким образом, не «просели ли продления у теста», а «просели ли они сильнее или слабее, чем у остальных». Отсюда и правило чтения графиков: <strong>параллельные линии</strong> — карточка не дала ничего, даже если сама метрика упала; <strong>расходящиеся</strong> — эффект есть.</p>
+
+    <h3 id="ov-res">Результат</h3>
+    <h4>Основная метрика · retention</h4>
+    <p class="reslabel">В июле тест выходит в заметный отрыв от контроля.</p>
 
     <div class="tw"><table class="dtable">
-      <thead><tr><th>Retention pure</th><th>Май</th><th>Июнь</th><th>Июль</th></tr></thead>
+      <thead><tr><th>retention pure</th><th>Май</th><th>Июнь</th><th>Июль</th></tr></thead>
       <tbody>
-        <tr class="t"><td>Тест</td><td>41,5%</td><td>29,1%</td><td>40,3%</td></tr>
+        <tr class="t"><td>Тест</td><td>42,7%</td><td>29,1%</td><td>40,3%</td></tr>
         <tr><td>Контроль</td><td>40,2%</td><td>26,6%</td><td>29,6%</td></tr>
-        <tr class="gaprow"><td>Разрыв</td><td>+1,3</td><td>+2,5</td><td>+10,7 · 99%</td></tr>
+        <tr class="gaprow"><td>Разрыв</td><td>+2,5</td><td>+2,5</td><td>+10,7 · 99%</td></tr>
       </tbody>
     </table></div>
-    <p class="tcap">Май — все лиды тест-ISM (карточек ещё нет); июнь/июль — только лиды с карточкой. В мае группы стартуют вровень, в июне обе проседают от сезонности синхронно, а в июле тест отрывается — разрыв +10,7 п.п. значим на уровне 99%.</p>
+    <p class="tcap">Май — тестовые ISM ещё <strong>без карточек</strong> (точка отсчёта); июнь/июль — только лиды с карточкой. В мае группы стартуют вровень, в июне обе проседают от сезонности синхронно, а в июле тест отрывается — разрыв +10,7 п.п. значим на уровне 99%.</p>
 
     <figure>
-      <div class="ftitle">Retention pure · тест против контроля · май → июль</div>
+      <div class="ftitle">retention pure · тест против контроля · май → июль</div>
       <div class="legend"><span><i style="border-color:var(--test)"></i>Тест</span><span><i style="border-color:var(--ctrl);border-top-style:dashed"></i>Контроль</span></div>
       <svg id="c-ret3" viewBox="0 0 700 240"></svg>
       <figcaption>Линии идут вплотную май→июнь и расходятся только в июле — это и есть основной эффект карточки.</figcaption>
     </figure>
 
-    <p>Остальные метрики, за которыми следили, показываем как <strong>DiD</strong> (насколько прирост теста отличается от прироста контроля) по двум переходам:</p>
+    <h4>Вторичные метрики</h4>
+    <p>Ожиданий по ним не было, поэтому показываем их в динамике — сдвинулись ли они у теста сильнее, чем у контроля, по каждому из двух переходов.</p>
 
     <div class="tw"><table class="dtable">
       <thead><tr><th>Метрика</th><th>DiD май→июнь</th><th>DiD июнь→июль</th><th>Статус</th></tr></thead>
       <tbody>
-        <tr><td>AOV (pure)</td><td>+0,55</td><td>−0,37</td><td>шум, не значимо</td></tr>
-        <tr><td>Выручка на лид (pure)</td><td>+0,31</td><td>+0,27</td><td>шум, не значимо</td></tr>
-        <tr><td>Своевременное заполнение</td><td>—</td><td>—</td><td>≈38% (только июль)</td></tr>
+        <tr><td>AOV</td><td>+0,54</td><td>−0,37</td><td>шум, не значимо</td></tr>
+        <tr><td>revenue/lead</td><td>+0,26</td><td>+0,27</td><td>шум, не значимо</td></tr>
       </tbody>
     </table></div>
-    <p class="tcap">AOV и выручка на лид — в млн Rp. Эти метрики шумные (считаются по десяткам продлившихся), поэтому опираемся на retention, а их держим как вспомогательные. Заполнение логировали только с июля.</p>
+    <p class="tcap">В млн Rp. Обе метрики считаются по десяткам продлившихся, поэтому легко скачут от единичных крупных чеков — знаки в двух переходах разные, значимости нет. Отсюда и решение опираться на retention, а деньги держать как вспомогательный сигнал.</p>
+
+    <h4>Метрика процесса</h4>
+    <p>Отдельно следим за тем, доходит ли вмешательство до клиента: карточка, заполненная после разговора с родителем, эффекта дать уже не может. Здесь DiD не применим — у контроля карточек нет, сравнивать не с чем.</p>
+    <div class="metrics">
+      <div class="mrow"><span class="mtag">Июль</span><div><b>93%</b> — доля карточек, заполненных своевременно, то есть до того, как ISM пошёл продлевать. Логировать начали только с июля, за май и июнь таких данных нет.</div></div>
+    </div>
+
+    <h4>Интересное наблюдение</h4>
+    <p>С июля мы логируем открытия — и тех же лидов можно разрезать иначе: не по заполнению карточки, а по тому, открывал ли её менеджер. Разрыв никуда не девается, скорее наоборот.</p>
+
+    <div class="tw"><table class="dtable">
+      <thead><tr><th>Июль · лиды тестовых ISM · без MT</th><th>Лиды</th><th>Валид.</th><th>retention raw</th><th>retention pure</th></tr></thead>
+      <tbody>
+        <tr class="t"><td>Карточку открывали ≥ 1 раза</td><td>266</td><td>162</td><td>24,8%</td><td>40,1%</td></tr>
+        <tr><td>Не открывали / карточки не было</td><td>546</td><td>283</td><td>17,2%</td><td>27,9%</td></tr>
+        <tr class="gaprow"><td>Разрыв</td><td></td><td></td><td>+7,6</td><td>+12,2</td></tr>
+      </tbody>
+    </table></div>
+    <p class="tcap">Обе группы — внутри тестовых ISM, контрольные менеджеры в срез не входят. Разрез идёт по <strong>открытию</strong> карточки (действие менеджера), а не по <strong>заполнению</strong> (как в основной таблице), поэтому состав групп и число валидных здесь другие. <span style="color:var(--faint)">Мелочь: у 36 валидных карточку открывали при неснятом флаге «заполнена» — вероятно, смотрели частично заполненную.</span></p>
+
+    <div class="callout">
+      <span class="tag">Как это читать</span>
+      Где инструментом действительно пользовались, там и результат выше — <strong>+12,2 п.п.</strong> против основных +10,7. Но опорным числом остаётся +10,7: открывать карточку менеджер решал сам, поэтому в этих группах сидит ещё и его старательность, а основной срез делится по заполнению — это работа преподавателя, от менеджера не зависящая. Так что здесь подтверждение в ту же сторону, а не отдельное доказательство.
+    </div>
   </section>
 
   <!-- METHOD -->
@@ -248,8 +395,8 @@
     <h2>Как устроен тест</h2>
 
     <div class="metrics">
-      <div class="mrow"><span class="mtag pri">Группы</span><div>Менеджеров (ISM) разделили на <b>10 тестовых</b> (работают только с заполненной карточкой) и <b>контроль</b> (как обычно, без неё). Группы собрали <b>равноценными на входе</b> — выровняли по конверсии и среднему числу уроков в месяц, чтобы тесту не достались клиенты получше.</div></div>
-      <div class="mrow"><span class="mtag">Заполнение</span><div>Карточки на студентов тестовых ISM заполняют преподаватели. С июня заполнение — <b>в дисциплинарной метрике преподавателей</b>, чтобы системно, а не по желанию.</div></div>
+      <div class="mrow"><span class="mtag pri">Группы</span><div>Менеджеров (ISM) разделили на <b>10 тестовых</b> (работают только с заполненной карточкой) и <b>контроль</b> (как обычно, без неё). Группы собрали <b>равноценными на входе</b> — выровняли по конверсии и среднему числу уроков в месяц, чтобы состав выборки в обеих группах был сопоставимым.</div></div>
+      <div class="mrow"><span class="mtag">Заполнение</span><div>Карточки на студентов тестовых ISM заполняют преподаватели. С июня заполнение — <b>в дисциплинарной метрике преподавателей</b>.</div></div>
       <div class="mrow"><span class="mtag">Подсчёт</span><div><b>Тест</b> — лиды тестовых ISM с заполненной карточкой. <b>Контроль</b> — все лиды остальных. Смотрим retention raw и pure, средний чек (AOV) и выручку на лид.</div></div>
     </div>
 
@@ -266,7 +413,7 @@
 
     <div class="callout">
       <span class="tag">Про Math Tutoring</span>
-      Везде ниже расчёты идут <strong>без Math Tutoring</strong>: на этом курсе карточку почти не использовали, поэтому она искажает картину. Данные с MT и разбор по нему — в приложении.
+      Везде ниже расчёты идут <strong>без Math Tutoring</strong>: на этом курсе карточка не даёт ISM нового знания о студенте, поэтому проверяемого вмешательства там по сути нет. Данные с MT и разбор по нему — в приложении.
     </div>
 
     <h3>Три месяца теста</h3>
@@ -284,33 +431,40 @@
     <p>В мае у нас было <strong>всего 2 менеджера</strong> и самая сырая версия карточки — запуск был нужен, чтобы <strong>собрать обратную связь</strong>, а не измерить импакт.</p>
 
     <h3>Базовые значения по группам</h3>
-    <p>Заодно зафиксируем, что мы называем группами — это определение работает и для июня, и для июля:</p>
     <div class="metrics">
       <div class="mrow"><span class="mtag pri">Тест</span><div>10 отобранных менеджеров и <b>все их лиды с заполненной карточкой</b>.</div></div>
       <div class="mrow"><span class="mtag">Контроль</span><div><b>Все лиды остальных ISM</b> (карточки у них нет).</div></div>
     </div>
-    <p>В мае карточек ещё почти не было, поэтому берём эти же группы «до карточки» — как точку отсчёта. Если распределение случайное, дальше они должны двигаться синхронно, а отличие в июне даст карточка. Вот значения в мае:</p>
+    <p>В мае это определение работает с поправкой: карточка была только у двух менеджеров и в сырой версии, поэтому в тест здесь идут <strong>все лиды тех же 10 ISM</strong> — фактически группа «до вмешательства». Так май и используем: не как замер эффекта, а как точку отсчёта. Если группы собраны корректно, дальше они должны двигаться синхронно, и всё расхождение в июне уже можно относить к карточке.</p>
 
     <div class="tw"><table class="dtable">
-      <thead><tr><th>Май · отправная точка</th><th>Лиды</th><th>Валид.</th><th>Retention raw</th><th>Retention pure</th></tr></thead>
+      <thead><tr><th>Май · отправная точка</th><th>Лиды</th><th>Валид.</th><th>retention raw</th><th>retention pure</th></tr></thead>
       <tbody>
         <tr class="t"><td>Тестовые ISM (без карточек)</td><td>726</td><td>475</td><td>32,6%</td><td>42,7%</td></tr>
         <tr><td>Контрольные ISM</td><td>1063</td><td>522</td><td>31,9%</td><td>40,2%</td></tr>
         <tr class="gaprow"><td>Разрыв</td><td></td><td></td><td>+0,7</td><td>+2,5</td></tr>
       </tbody>
     </table></div>
-    <p class="tcap">Группы стартуют практически вровень (pure 42,7% против 40,2%) — то есть они сопоставимы, и дальше расхождение можно будет приписывать карточке, а не разному составу. Выручки за май в данных нет, поэтому только retention.</p>
+    <p class="tcap">Группы стартуют практически вровень (pure 42,7% против 40,2%) — то есть они сопоставимы, и дальше расхождение можно будет приписывать карточке, а не разному составу.</p>
 
-    <figure>
-      <div class="ftitle">Срез в мае · тест против контроля</div>
-      <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
-      <svg id="c-may" viewBox="0 0 700 260"></svg>
-      <figcaption>Обе группы почти совпадают и по raw, и по pure — карточки ещё нет, стартовые условия одинаковые.</figcaption>
-    </figure>
+    <div class="pair">
+      <figure>
+        <div class="ftitle">retention</div>
+        <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
+        <svg id="c-may-ret" viewBox="0 0 700 300"></svg>
+        <figcaption>Обе группы почти совпадают и по raw, и по pure — карточки ещё нет, стартовые условия одинаковые.</figcaption>
+      </figure>
+      <figure>
+        <div class="ftitle">Деньги, млн Rp</div>
+        <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
+        <svg id="c-may-money" viewBox="0 0 700 300"></svg>
+        <figcaption>По деньгам на старте тест даже чуть ниже контроля (AOV 4,05 против 4,27; выручка на лид 1,65 против 1,71) — расхождение появится позже.</figcaption>
+      </figure>
+    </div>
     <details class="perism">
       <summary>Разбивка по менеджерам · май</summary>
       <div class="perism-grid">
-      <div class="tw"><table class="dtable"><thead><tr><th>Тест · ISM</th><th>Лиды</th><th>Ret. raw</th><th>Ret. pure</th></tr></thead><tbody>
+      <div class="tw"><table class="dtable"><thead><tr><th>Тест · ISM</th><th>Лиды</th><th>retention raw</th><th>retention pure</th></tr></thead><tbody>
 <tr><td>Angel</td><td>75</td><td>24.0%</td><td>40.6%</td></tr>
 <tr><td>Echa</td><td>72</td><td>20.8%</td><td>34.1%</td></tr>
 <tr><td>Fatin</td><td>99</td><td>38.4%</td><td>51.5%</td></tr>
@@ -323,7 +477,7 @@
 <tr><td>Vey</td><td>62</td><td>19.4%</td><td>24.4%</td></tr>
 <tr class="gaprow"><td>Итого (pooled)</td><td>726</td><td>32.6%</td><td>42.7%</td></tr>
 </tbody></table></div>
-      <div class="tw"><table class="dtable"><thead><tr><th>Контроль · ISM</th><th>Лиды</th><th>Ret. raw</th><th>Ret. pure</th></tr></thead><tbody>
+      <div class="tw"><table class="dtable"><thead><tr><th>Контроль · ISM</th><th>Лиды</th><th>retention raw</th><th>retention pure</th></tr></thead><tbody>
 <tr><td>Abdul</td><td>90</td><td>34.4%</td><td>36.4%</td></tr>
 <tr><td>Amel</td><td>88</td><td>10.2%</td><td>11.1%</td></tr>
 <tr><td>Arin</td><td>89</td><td>18.0%</td><td>26.9%</td></tr>
@@ -338,7 +492,10 @@
       </div>
     </details>
 
-    <p><strong>Что дал май:</strong> живое использование, обратную связь и отладку процесса — ISM потрогали инструмент, мы нашли, где возникают косяки, поправили и добавили поля в обратную связь. За выводами пошли в июнь, уже с нормальными группами.</p>
+    <div class="callout">
+      <span class="tag">Что дал май</span>
+      Живое использование и отладку процесса: ISM потрогали инструмент, мы нашли, где возникают косяки, поправили их и добавили поля в обратную связь. За выводами пошли в июнь — уже с нормальными группами.
+    </div>
   </section>
 
   <!-- JUNE -->
@@ -352,16 +509,17 @@
     </div>
 
     <p>Здесь уже полноценный дизайн:</p>
-    <ul class="plain">
-      <li>10 выровненных тестовых ISM;</li>
-      <li>заполнение карточки — в дисциплинарной метрике преподавателей;</li>
-      <li>ввели с первой недели июня (не мгновенно — у части карточек момент заполнения чуть сместился, но доля крошечная и на результат не влияет, это проверено).</li>
-    </ul>
+    <div class="metrics">
+      <div class="mrow"><span class="mtag pri">Группы</span><div><b>10 выровненных тестовых ISM</b> против остальных менеджеров.</div></div>
+      <div class="mrow"><span class="mtag">Заполнение</span><div>Карточка — <b>в дисциплинарной метрике преподавателей</b>, а не по желанию.</div></div>
+      <div class="mrow"><span class="mtag">Старт</span><div>С <b>первой недели июня</b>.</div></div>
+    </div>
+    <p class="tcap">Раскатка была не мгновенной: у части карточек момент заполнения чуть сместился. Доля таких случаев крошечная, на результат не влияет — проверено отдельно.</p>
 
     <h3>Срез в июне</h3>
 
     <div class="tw"><table class="dtable">
-      <thead><tr><th>Июнь · группа</th><th>Лиды</th><th>Валид.</th><th>Ret. raw</th><th>Ret. pure</th><th>Ср. чек</th><th>Выр./лид</th></tr></thead>
+      <thead><tr><th>Июнь · группа</th><th>Лиды</th><th>Валид.</th><th>retention raw</th><th>retention pure</th><th>AOV</th><th>revenue/lead</th></tr></thead>
       <tbody>
         <tr class="t"><td>Тест (с карточкой)</td><td>406</td><td>299</td><td>22,9%</td><td>29,1%</td><td>4,16</td><td>1,22</td></tr>
         <tr><td>Контроль</td><td>1125</td><td>676</td><td>17,5%</td><td>26,6%</td><td>3,84</td><td>1,02</td></tr>
@@ -372,7 +530,7 @@
     <details class="perism">
       <summary>Разбивка по менеджерам · июнь</summary>
       <div class="perism-grid">
-      <div class="tw"><table class="dtable"><thead><tr><th>Тест · ISM</th><th>Лиды</th><th>Ret. raw</th><th>Ret. pure</th><th>Rev, млн</th><th>AOV, млн</th></tr></thead><tbody>
+      <div class="tw"><table class="dtable"><thead><tr><th>Тест · ISM</th><th>Лиды</th><th>retention raw</th><th>retention pure</th><th>revenue, млн</th><th>AOV, млн</th></tr></thead><tbody>
 <tr><td>Angel</td><td>39</td><td>30.8%</td><td>37.5%</td><td>57.3</td><td>4.77</td></tr>
 <tr><td>Echa</td><td>34</td><td>14.7%</td><td>23.8%</td><td>17.2</td><td>3.44</td></tr>
 <tr><td>Fatin</td><td>53</td><td>22.6%</td><td>25.6%</td><td>42.6</td><td>3.55</td></tr>
@@ -385,7 +543,7 @@
 <tr><td>Vey</td><td>46</td><td>23.9%</td><td>30.0%</td><td>35.3</td><td>3.21</td></tr>
 <tr class="gaprow"><td>Итого (pooled)</td><td>406</td><td>22.9%</td><td>29.1%</td><td>386.7</td><td>4.16</td></tr>
 </tbody></table></div>
-      <div class="tw"><table class="dtable"><thead><tr><th>Контроль · ISM</th><th>Лиды</th><th>Ret. raw</th><th>Ret. pure</th><th>Rev, млн</th><th>AOV, млн</th></tr></thead><tbody>
+      <div class="tw"><table class="dtable"><thead><tr><th>Контроль · ISM</th><th>Лиды</th><th>retention raw</th><th>retention pure</th><th>revenue, млн</th><th>AOV, млн</th></tr></thead><tbody>
 <tr><td>Abdul</td><td>80</td><td>17.5%</td><td>25.5%</td><td>44.2</td><td>3.16</td></tr>
 <tr><td>Adel</td><td>49</td><td>20.4%</td><td>26.7%</td><td>30.2</td><td>3.02</td></tr>
 <tr><td>Amel</td><td>83</td><td>14.5%</td><td>14.8%</td><td>47.4</td><td>3.95</td></tr>
@@ -408,7 +566,7 @@
 
     <div class="pair">
       <figure>
-        <div class="ftitle">Retention</div>
+        <div class="ftitle">retention</div>
         <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
         <svg id="c-jun-ret" viewBox="0 0 700 300"></svg>
         <figcaption>По удержанию тест выше совсем чуть-чуть (pure 29,1% против 26,6%) — в пределах шума.</figcaption>
@@ -422,10 +580,18 @@
     </div>
 
     <h3>Динамика май → июнь</h3>
-    <p>Здесь есть корректный способ померить импакт, несмотря на то что помесячно составы клиентов разные. Берём <strong>тех же тестовых менеджеров</strong>: в мае — их лиды <strong>без карточки</strong> (базовый уровень), в июне — <strong>с карточкой</strong>. Контроль в оба месяца без изменений. Если бы карточка ничего не давала, обе группы двигались бы синхронно — а импакт это <strong>разница в приросте</strong> (DiD). По удержанию этой разницы нет, <strong>но по среднему чеку тест заметно вырос относительно контроля</strong>.</p>
+    <p>Составы клиентов помесячно разные, но померить импакт всё равно можно — вот как:</p>
+    <ol class="steps">
+      <li>Берём <strong>тех же тестовых менеджеров</strong> в оба месяца, чтобы состав группы не менялся.</li>
+      <li><strong>Май</strong> — их лиды <strong>без карточки</strong>. Это базовый уровень.</li>
+      <li><strong>Июнь</strong> — их лиды <strong>с карточкой</strong>.</li>
+      <li><strong>Контроль</strong> в оба месяца без изменений — он показывает, как двигался бы тест сам по себе.</li>
+      <li class="out">Импакт — <strong>разница в приросте</strong> между группами.</li>
+    </ol>
+    <p>По удержанию этой разницы нет, <strong>но по среднему чеку тест заметно вырос относительно контроля</strong>.</p>
     <div class="pair">
       <figure>
-        <div class="ftitle">Retention pure</div>
+        <div class="ftitle">retention pure</div>
         <div class="legend"><span><i style="border-color:var(--test)"></i>Тест</span><span><i style="border-color:var(--ctrl);border-top-style:dashed"></i>Контроль</span></div>
         <svg id="c-mj" viewBox="0 0 700 210"></svg>
         <figcaption>Тест 42,7% → 29,1% (−13,6 п.п.), контроль 40,2% → 26,6% (−13,6 п.п.) — <strong>ровно параллельно</strong>. DiD = 0: по удержанию карточка в июне не дала ничего, спад — чистая сезонность.</figcaption>
@@ -434,7 +600,7 @@
         <div class="ftitle">AOV, млн Rp</div>
         <div class="legend"><span><i style="border-color:var(--test)"></i>Тест</span><span><i style="border-color:var(--ctrl);border-top-style:dashed"></i>Контроль</span></div>
         <svg id="c-mj-aov" viewBox="0 0 700 210"></svg>
-        <figcaption>А тут линии расходятся: тест 4,04 → 4,16, контроль 4,27 → 3,84. DiD = +0,55 — импакт июня ушёл в чек, а не в удержание.</figcaption>
+        <figcaption>А тут линии расходятся: тест 4,05 → 4,16, контроль 4,27 → 3,84. DiD = +0,54 — импакт июня ушёл в чек, а не в удержание.</figcaption>
       </figure>
     </div>
 
@@ -448,17 +614,22 @@
   <section id="july">
     <span class="eyebrow">Месяц 3</span>
     <h2>Июль — чистый месяц</h2>
-    <p>Июль — самый чистый месяц: сезон нормализовался, процесс устоялся, поэтому подсчётам здесь можно доверять больше всего.</p>
+    <p>Июль — самый чистый месяц теста, и подсчётам здесь можно доверять больше всего. Три причины:</p>
+    <div class="months">
+      <div class="mplaque"><div class="mm">Сезон</div><div class="mt">Нормализовался</div><div class="md">Нет июньских заморозок и переносов, продления вернулись к обычному уровню.</div></div>
+      <div class="mplaque"><div class="mm">Процесс</div><div class="mt">Устоялся</div><div class="md">Инструмент обкатан за два месяца, ISM работают с карточкой привычно.</div></div>
+      <div class="mplaque"><div class="mm">Данные</div><div class="mt">Полнее</div><div class="md">С июля логируем не только заполнение, но и открытия карточки.</div></div>
+    </div>
 
     <div class="callout">
       <span class="tag">Заполнили заранее</span>
-      Ещё во время июньского прогона препы заполнили карточки примерно по <strong>половине июльских лидов</strong> — это сэкономило время и сняло проблему с заполнением. Плюс с июля логировали открытия карточки (цифры — в приложении).
+      Во время июньского прогона препы заполнили карточки примерно по <strong>половине июльских лидов</strong>: это сэкономило время и сняло проблему с заполнением к началу месяца. Цифры по открытиям — в приложении.
     </div>
 
     <p>И здесь картина меняется: <strong>вперёд выходит удержание</strong> — тест по pure retention отрывается от контроля, тогда как чек остаётся ровным.</p>
 
     <div class="tw"><table class="dtable">
-      <thead><tr><th>Июль · группа</th><th>Лиды</th><th>Валид.</th><th>Ret. raw</th><th>Ret. pure</th><th>Ср. чек</th><th>Выр./лид</th></tr></thead>
+      <thead><tr><th>Июль · группа</th><th>Лиды</th><th>Валид.</th><th>retention raw</th><th>retention pure</th><th>AOV</th><th>revenue/lead</th></tr></thead>
       <tbody>
         <tr class="t"><td>Тест (с карточкой)</td><td>335</td><td>186</td><td>23,6%</td><td>40,3%</td><td>3,81</td><td>1,55</td></tr>
         <tr><td>Контроль</td><td>942</td><td>467</td><td>18,5%</td><td>29,6%</td><td>3,86</td><td>1,08</td></tr>
@@ -469,7 +640,7 @@
     <details class="perism">
       <summary>Разбивка по менеджерам · июль</summary>
       <div class="perism-grid">
-      <div class="tw"><table class="dtable"><thead><tr><th>Тест · ISM</th><th>Лиды</th><th>Ret. raw</th><th>Ret. pure</th><th>Rev, млн</th><th>AOV, млн</th></tr></thead><tbody>
+      <div class="tw"><table class="dtable"><thead><tr><th>Тест · ISM</th><th>Лиды</th><th>retention raw</th><th>retention pure</th><th>revenue, млн</th><th>AOV, млн</th></tr></thead><tbody>
 <tr><td>Angel</td><td>31</td><td>9.7%</td><td>23.1%</td><td>20.1</td><td>6.69</td></tr>
 <tr><td>Echa</td><td>50</td><td>10.0%</td><td>22.7%</td><td>17.4</td><td>3.47</td></tr>
 <tr><td>Fatin</td><td>26</td><td>46.2%</td><td>70.6%</td><td>46.2</td><td>3.85</td></tr>
@@ -482,7 +653,7 @@
 <tr><td>Vey</td><td>35</td><td>20.0%</td><td>46.7%</td><td>29.9</td><td>4.27</td></tr>
 <tr class="gaprow"><td>Итого (pooled)</td><td>335</td><td>23.6%</td><td>40.3%</td><td>301.3</td><td>3.81</td></tr>
 </tbody></table></div>
-      <div class="tw"><table class="dtable"><thead><tr><th>Контроль · ISM</th><th>Лиды</th><th>Ret. raw</th><th>Ret. pure</th><th>Rev, млн</th><th>AOV, млн</th></tr></thead><tbody>
+      <div class="tw"><table class="dtable"><thead><tr><th>Контроль · ISM</th><th>Лиды</th><th>retention raw</th><th>retention pure</th><th>revenue, млн</th><th>AOV, млн</th></tr></thead><tbody>
 <tr><td>Abdul</td><td>75</td><td>13.3%</td><td>18.4%</td><td>29.0</td><td>2.90</td></tr>
 <tr><td>Adel</td><td>59</td><td>18.6%</td><td>38.5%</td><td>35.2</td><td>3.20</td></tr>
 <tr><td>Amel</td><td>84</td><td>9.5%</td><td>20.6%</td><td>30.2</td><td>3.77</td></tr>
@@ -508,7 +679,7 @@
     <h3>Срез в июле</h3>
     <div class="pair">
       <figure>
-        <div class="ftitle">Retention</div>
+        <div class="ftitle">retention</div>
         <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
         <svg id="c-jul-ret" viewBox="0 0 700 300"></svg>
         <figcaption>Главный результат: pure retention 40,3% против 29,6% — разрыв +10,7 п.п., значим на 99%.</figcaption>
@@ -524,7 +695,7 @@
     <h3>Динамика июнь → июль</h3>
     <div class="pair">
       <figure>
-        <div class="ftitle">Retention pure</div>
+        <div class="ftitle">retention pure</div>
         <div class="legend"><span><i style="border-color:var(--test)"></i>Тест</span><span><i style="border-color:var(--ctrl);border-top-style:dashed"></i>Контроль</span></div>
         <svg id="c-jj-ret" viewBox="0 0 700 210"></svg>
         <figcaption>Тест 29,1% → 40,3%, контроль 26,6% → 29,6%. DiD = <strong>+8,2 п.п.</strong> — вот здесь линии и расходятся.</figcaption>
@@ -537,17 +708,41 @@
       </figure>
     </div>
 
-    <div class="callout"><span class="tag">Гипотеза</span>Здесь будет гипотеза, почему в июле вырос retention, а не чек.</div>
   </section>
 
   <!-- FINDINGS -->
   <section id="findings">
     <span class="eyebrow">Выводы по цифрам</span>
     <h2>Что в итоге показали три месяца</h2>
-    <p><strong>Май</strong> — отправная точка. Измерить эффект было нельзя (нет привязки заполнения ко времени, неравные группы, крошечная выборка); ценность месяца — обкатка инструмента и обратная связь, а не числа.</p>
-    <p><strong>Июнь</strong> — первый полноценный, но сезонно шумный месяц. Карточка проявилась в <strong>деньгах</strong>: средний чек и выручка на лид у теста выше (4,16 против 3,84; 1,22 против 1,02). По удержанию разрыв мал и статистически не значим — списываем на сезонность.</p>
-    <p><strong>Июль</strong> — чистый месяц, и именно он отличает финал эксперимента от предыдущих: здесь всё ровно, поэтому смотреть можно и на динамику, и на статику. Карточка проявилась в <strong>удержании</strong>: pure retention 40,3% против 29,6% (+10,7 п.п., значимо на 99%), DiD июнь→июль +8,2 п.п. Средний чек при этом почти не изменился.</p>
-    <div class="callout"><span class="tag">Гипотеза</span>Здесь будет гипотеза, почему в июне сработал чек, а в июле — удержание.</div>
+    <div class="vlist">
+      <div class="vcard">
+        <div class="vm">Май</div>
+        <div class="vh">Отправная точка, а не измерение</div>
+        <ul>
+          <li>Померить эффект было нельзя: карточка ещё почти не была развёрнута (сырой пилот на 2 ISM, <b>без привязки заполнения ко времени</b>, крошечная выборка).</li>
+          <li>Ценность месяца — обкатка инструмента и обратная связь. Зато зафиксировали точку отсчёта: группы стартуют вровень.</li>
+        </ul>
+      </div>
+      <div class="vcard">
+        <div class="vm">Июнь</div>
+        <div class="vh">Эффект ушёл в деньги</div>
+        <ul>
+          <li>Средний чек у теста выше: <b>4,16 против 3,84</b>.</li>
+          <li>Выручка на лид тоже выше: <b>1,22 против 1,02</b>.</li>
+          <li>По удержанию разрыв мал и <b>не значим</b> — списываем на сезонность.</li>
+        </ul>
+      </div>
+      <div class="vcard key">
+        <div class="vm">Июль · опорный месяц</div>
+        <div class="vh">Эффект ушёл в удержание</div>
+        <ul>
+          <li>Pure retention <b>40,3% против 29,6%</b> — разрыв <b>+10,7 п.п.</b>, значим на 99%.</li>
+          <li>DiD июнь→июль — <b>+8,2 п.п.</b></li>
+          <li>Средний чек при этом почти не изменился.</li>
+          <li>Условия ровные, поэтому смотреть можно и на статику, и на динамику.</li>
+        </ul>
+      </div>
+    </div>
     <p>Главное: на июле, где условия чистые, эффект карточки виден в удержании и подтверждается числами. Как именно мы в этом убедились — в следующем разделе.</p>
   </section>
 
@@ -555,61 +750,160 @@
   <section id="guarantees">
     <span class="eyebrow">Пруфы</span>
     <h2>Почему цифрам можно верить</h2>
-    <p class="sub">Предыдущий раздел самодостаточен: из него понятно, откуда взялись числа. Этот — для тех, кто спросит «а точно?».</p>
 
-    <p>Июльский разрыв мог бы соврать двумя способами: либо тесту достались другие клиенты (состав), либо это колебание выборки (случайность). Проверили оба. Из всех характеристик клиента на продление сильнее всего влияют <strong>курс</strong> и <strong>номер пролонгации</strong> — с них и начали.</p>
+    <p>Июльский разрыв мог бы соврать двумя способами. Проверили оба:</p>
+    <div class="months two">
+      <div class="mplaque"><div class="mm">Риск 1</div><div class="mt">Состав</div><div class="md">Тесту просто достались клиенты, которые продлевают охотнее.</div></div>
+      <div class="mplaque"><div class="mm">Риск 2</div><div class="mt">Случайность</div><div class="md">Разрыв реален в цифрах, но это колебание небольшой выборки.</div></div>
+    </div>
+    <p>Из всех характеристик клиента на продление сильнее всего влияют <strong>курс</strong> и <strong>номер пролонгации</strong> — с них и начали.</p>
 
     <h3>Проверка состава · номер пролонгации</h3>
-    <p>Чем выше номер платежа (дольше учится студент), тем охотнее он продлевает. У теста таких «стажированных» клиентов чуть больше — значит это надо держать под контролем.</p>
-    <figure>
-      <div class="ftitle">Вероятность продления по номеру платежа</div>
-      <div class="fsub">июль · все клиенты</div>
-      <svg id="c-ladder" viewBox="0 0 700 260"></svg>
-    </figure>
+    <p>Чем выше номер платежа (дольше учится студент), тем охотнее он продлевает — это <strong>левый</strong> график. Значит если у одной группы «стажированных» клиентов больше, её retention будет выше сам по себе. Поэтому смотрим распределение — <strong>правый</strong> график: составы близкие, но у теста номеров #3 и #4+ чуть больше (средний номер <strong>3,05 против 2,78</strong>). Небольшой перекос есть — на него и сделаем поправку ниже.</p>
+    <div class="pair">
+      <figure>
+        <div class="ftitle">retention по номеру платежа</div>
+        <div class="fsub">июль · все клиенты</div>
+        <svg id="c-ladder" viewBox="0 0 700 300"></svg>
+      </figure>
+      <figure>
+        <div class="ftitle">Распределение · доля лидов группы</div>
+        <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
+        <svg id="c-pn-dist" viewBox="0 0 700 300"></svg>
+      </figure>
+    </div>
 
     <h3>Проверка состава · курс</h3>
-    <p>Карточку заполняли неравномерно по курсам (от 13% до 96%), а курсы продлеваются очень по-разному — ещё один параметр, который надо уравнять.</p>
+    <p>Курсы продлеваются очень по-разному, поэтому разный набор курсов у групп сам по себе сдвинул бы retention. Смотрим, как лиды распределены по курсам:</p>
+    <p class="mixstat"><b>72%</b> — настолько совпадают составы теста и контроля по курсам. Оставшийся разброс — в нескольких мелких курсах, а крупнее всего один:</p>
+    <figure>
+      <div class="ftitle">Где составы расходятся · доля лидов группы</div>
+      <div class="legend"><span><span class="sw" style="background:var(--test)"></span>Тест</span><span><span class="sw" style="background:var(--ctrl)"></span>Контроль</span></div>
+      <svg id="c-course-mix" viewBox="0 0 700 250"></svg>
+    </figure>
+    <p>Почти весь объём (нижняя строка — «прочие курсы») у групп совпадает: 70% против 70%. Заметно расходится по сути один курс — <strong>Visual Programing</strong> (у контроля 14,6% против 3,6% у теста), а он с низким продлением, поэтому тянет retention контроля вниз и раздувает сырой разрыв. Значит по курсу тоже нужна поправка — и вот что с ней происходит.</p>
 
     <h3>Разрыв держится после поправок</h3>
     <p>Мы уравняли группы по обоим параметрам и пересчитали разрыв. Он уменьшился, но <strong>не исчез</strong> — значит преимущество теста не сводится к более удобному составу.</p>
     <figure>
-      <div class="ftitle">Разрыв pure retention после поправок</div>
+      <div class="ftitle">Разрыв retention pure после поправок</div>
       <div class="fsub">тест − контроль, июль, п.п.</div>
       <svg id="c-adj" viewBox="0 0 700 220"></svg>
     </figure>
 
     <h3>И это не случайность</h3>
-    <p>Разрыв подтверждают и калькулятор значимости, и доверительные интервалы. Честно про величину: точный размер прироста мы знаем не как «ровно столько-то», а как <strong>диапазон</strong>. Если планка интервала не задевает ноль — разрыв реален.</p>
+    <p>Отдельно проверяем, не могла ли разница возникнуть просто от случайного разброса маленькой выборки. Ответ — нет: и калькулятор значимости (p&nbsp;=&nbsp;0,01), и доверительный интервал говорят, что эффект <strong>реальный и положительный</strong>.</p>
+    <p>Причём интервал сам по себе — сильный результат. Он очерчивает <strong>коридор, в котором лежит истинный прирост</strong>, и весь этот коридор выше нуля:</p>
+    <div class="result three">
+      <div class="rblock"><div class="rk">Минимум (осторожная граница)</div><div class="huge">+3&nbsp;<small>п.п.</small></div></div>
+      <div class="rblock primary"><div class="rk">Наиболее вероятно</div><div class="huge">+11&nbsp;<small>п.п.</small></div></div>
+      <div class="rblock"><div class="rk">Максимум</div><div class="huge">+19&nbsp;<small>п.п.</small></div></div>
+    </div>
+    <p>Иначе говоря: карточка добавляет к продлению <strong>минимум ~3 п.п., вероятнее всего ~11, максимум ~19</strong> (95% доверия). Нижняя граница не касается нуля — значит вопрос «а вдруг это случайность?» закрыт, а наиболее вероятное значение вдвое перекрывает целевые +5 п.п.</p>
     <figure>
-      <div class="ftitle">Интервал разрыва · пересекает ли ноль</div>
+      <div class="ftitle">Интервал разрыва · весь коридор выше нуля</div>
       <div class="fsub">тест − контроль, п.п. · точка — оценка, планка — 95% интервал</div>
       <svg id="c-ci" viewBox="0 0 700 240"></svg>
-      <figcaption>Pure retention — интервал уверенно правее нуля (значимо). Raw — планка задевает ноль, поэтому опираемся на pure.</figcaption>
+      <figcaption>Pure retention — интервал уверенно правее нуля (эффект есть). Raw — планка задевает ноль, поэтому опорной берём именно pure.</figcaption>
     </figure>
   </section>
 
   <!-- CONCLUSION -->
-  <section id="conclusion" style="border-bottom:none">
+  <section id="conclusion">
     <div class="concl">
       <span class="tag">Вывод</span>
-      <h2>Заголовок вывода</h2>
-      <p class="ph">Этот блок пишешь сам — от гипотезы (+5 п.п.) и ключевых метрик: подтвердилась ли она, что делаем с раскаткой и августовским тестом.</p>
+      <h2>Гипотеза подтвердилась: карточка даёт +10,7 п.п. к продлению — вдвое больше целевых +5</h2>
+      <p>В июле — единственном месяце с ровными условиями — ISM, работавшие с заполненной карточкой, продлили <strong>40,3%</strong> валидных клиентов против <strong>29,6%</strong> у контроля. Разрыв <strong>+10,7 п.п.</strong> значим на уровне 99%, подтверждается динамикой (DiD июнь→июль <strong>+8,2 п.п.</strong>) и не исчезает после выравнивания групп по курсу и номеру пролонгации — двум характеристикам, которые сильнее всего двигают продление.</p>
+      <p>Деньги идут не через чек, а через удержание: средний чек у групп сравнялся (3,81 против 3,86 млн Rp), а выручка на лид у теста выше в полтора раза — <strong>1,55 против 1,08</strong>, то есть <strong>+0,47 млн Rp на каждый лид</strong>. Это и есть форма, в которой эффект доходит до P&amp;L.</p>
+      <p>Целевую планку мы перекрыли с запасом, поэтому вопрос августа не «работает ли карточка», а <strong>сохранится ли эффект такого размера на полной раскатке</strong>.</p>
     </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n">+10,7 п.п.</div><div class="k">Разрыв по retention pure, июль. Цель была +5 п.п.</div></div>
+      <div class="stat"><div class="n">×1,4</div><div class="k">Выручка на лид: 1,55 против 1,08 млн Rp</div></div>
+      <div class="stat"><div class="n">99%</div><div class="k">Уровень значимости основного разрыва</div></div>
+    </div>
+
+    <h3 id="cn-what">Что именно мы измерили</h3>
+    <p>Мы измерили <strong>решение о продлении</strong>, а не качество работы ISM и не долгие деньги. Карточка, судя по цифрам, снимает не мотивационный барьер клиента, а <strong>информационный барьер менеджера</strong>: ISM входит в разговор, уже зная академический портрет студента — сильные зоны, зоны роста, мотиваторы, — и разговор чаще заканчивается продлением. Косвенно это подтверждает Math Tutoring: там, где карточка не создаёт нового знания, а перекладывает системные данные, её просто не открывают (21% против 66% на остальных курсах) — и эффекта нет.</p>
+
+    <h3 id="cn-limits">Чего результат пока не доказывает</h3>
+    <ul class="plain">
+      <li><strong>Одна чистая точка.</strong> Июль — единственный месяц с ровными условиями. В июне эффект в удержании был нулевым (DiD = 0), а ушёл в чек. Пока у нас нет второй чистой точки, мы не можем отделить устойчивый эффект от удачного месяца.</li>
+      <li><strong>Эффект измерен на половине лидов.</strong> Карточку заполнили у 50% лидов тестовых ISM в июне и 38% в июле. На выводы это не влияет, но на полной раскатке карточку получат и те лиды, на которых сейчас её не заполняли, — эффект может размыться.</li>
+      <li><strong>Дозозависимость не доказана.</strong> Срез «открывал карточку хотя бы раз» даёт разрыв даже шире основного (+12,2 п.п.), но группы там сложились сами: открывает тот, кто дисциплиннее, и у того лида, который перспективнее. Читать как эффект инструмента нельзя.</li>
+      <li><strong>Долгих денег мы не видели.</strong> Измерен факт продления, но не следующая пролонгация и не LTV. Возможен и сдвиг во времени: часть продлений могла просто случиться раньше.</li>
+      <li><strong>Эффект новизны.</strong> 10 тестовых ISM знали, что участвуют в эксперименте. Отделить вклад карточки от вклада внимания к процессу можно только на раскатке.</li>
+    </ul>
+
+    <h3 id="cn-dec">Решение: раскатываем, но с холдаутом на август</h3>
+    <p>Основная метрика перекрыла ожидание вдвое, ни одна из вспомогательных не ухудшилась, риск состава и риск случайности проверены. Держать инструмент на 10 менеджерах дальше нет причин.</p>
+    <p>При этом раскатывать сразу на 100% — значит потерять возможность проверить результат: после этого контрольной группы не останется и вопрос «эффект устойчив или это был июль» останется без ответа навсегда. Поэтому <strong>раскатываем на всех ISM, кроме холдаута ~20–25% менеджеров на один месяц</strong>. Цена — один месяц отложенного эффекта на четверти команды; выгода — вторая чистая точка и понимание, на какое число закладываться в планах.</p>
+
+    <h4>Что делаем в августе</h4>
+    <ol class="steps">
+      <li><strong>Раскатка на всех ISM за вычетом холдаута.</strong> Холдаут собираем тем же способом, что и исходные группы, — выравниваем по конверсии и среднему числу уроков. Один месяц, дальше раскатываем и его.</li>
+      <li><strong>Доводим заполнение до 90%+.</strong> Сейчас 38% — это главный ограничитель эффекта в масштабе: половина лидов вмешательства просто не получает. Заполнение остаётся в дисциплинарной метрике преподавателей, дедлайн — до открытия окна продления; своевременность (в июле 93%) продолжаем логировать как метрику процесса.</li>
+      <li><strong>Расширяем логирование использования:</strong> открытия по всем ISM, какие блоки карточки открывали, было ли открытие до первого контакта с родителем. Без этого мы не сможем ответить, что именно в карточке работает.</li>
+      <li><strong>Считаем эффект в сегментах:</strong> по номеру пролонгации, по курсам, по силе ISM (квартили базовой конверсии), по размеру пакета. Общие +10,7 п.п. почти наверняка скрывают более сильный эффект в одной из групп — и там же лежит приоритет доработки.</li>
+      <li><strong>Считаем экономику целиком:</strong> +0,47 млн Rp на лид против стоимости заполнения (время преподавателей на карточку). Экстраполировать июльские +0,47 на всю базу до раскатки не будем — это потолок оценки, а не прогноз.</li>
+      <li><strong>Math Tutoring — отдельным треком.</strong> Раскатывать в текущем виде смысла нет: инструмент там не создаёт нового знания. Либо добавляем академический блок и тестируем заново, либо оставляем курс за рамками продукта.</li>
+      <li><strong>Смотрим следующий цикл продления</strong> у июньско-июльской тестовой когорты — продлились ли они второй раз. Это первая проверка на то, что мы подняли удержание, а не сдвинули его во времени.</li>
+    </ol>
+
+    <h3 id="cn-hyp">Гипотезы на следующий цикл</h3>
+    <div class="vlist">
+      <div class="vcard key">
+        <div class="vm">Гипотеза 1</div>
+        <div class="vh">Работает академический портрет, а не карточка как факт</div>
+        <ul>
+          <li>Если ценность создаёт именно знание от преподавателя, то версия карточки только с системными данными эффекта не даст.</li>
+          <li><b>Как проверяем:</b> A — полная карточка, B — карточка без академического блока. Math Tutoring — уже наблюдение в пользу этой гипотезы.</li>
+        </ul>
+      </div>
+      <div class="vcard">
+        <div class="vm">Гипотеза 2</div>
+        <div class="vh">Карточка меняет разговор по-разному в зависимости от сезона</div>
+        <ul>
+          <li>В слабый июнь эффект ушёл в чек, в нормальный июль — в удержание. Возможное объяснение: когда продлевают только «готовые», знание о студенте работает на апсейл, а в обычный месяц — на возврат сомневающихся.</li>
+          <li><b>Как проверяем:</b> разрез продлений по длине пакета и по исходной вероятности продления лида, в оба месяца.</li>
+        </ul>
+      </div>
+      <div class="vcard">
+        <div class="vm">Гипотеза 3</div>
+        <div class="vh">Эффект сильнее у менеджеров со слабой базовой конверсией</div>
+        <ul>
+          <li>Если карточка компенсирует нехватку знания о студенте, сильный ISM добирает его и сам — тогда uplift должен падать с ростом базовой конверсии.</li>
+          <li><b>Как проверяем:</b> uplift по квартилям ISM. От ответа зависит, кому раскатывать в первую очередь и на кого настраивать обучение.</li>
+        </ul>
+      </div>
+      <div class="vcard">
+        <div class="vm">Гипотеза 4</div>
+        <div class="vh">Эффект дозозависим, и открытие можно стимулировать</div>
+        <ul>
+          <li>Срез по открытиям намекает на дозозависимость, но самоотбор мешает это утверждать. Если гипотеза верна, принудительное напоминание перед звонком поднимет результат.</li>
+          <li><b>Как проверяем:</b> нотификация ISM с карточкой перед контактом — включена/выключена случайным образом.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout"><span class="tag">Что закрыть методически</span>Значимость считается по лидам (pooled), тогда как вмешательство назначено на уровне ISM — внутри менеджера лиды коррелируют, и p-value по лидам оптимистичнее реального. На августовской раскатке стоит пересчитать разрыв с поправкой на кластеризацию по ISM: направление вывода это не изменит, но честный интервал будет шире.</div>
   </section>
 
   <!-- APPENDIX -->
   <section id="appendix">
     <span class="eyebrow">Приложение</span>
     <h2>С Math Tutoring и по Math Tutoring</h2>
-    <p>Основной отчёт — без MT. Со всеми курсами разрыв по pure retention <strong>+10,1 п.п.</strong> против <strong>+10,7 п.п.</strong> без MT: MT слегка занижает результат, но качественно ничего не меняет.</p>
+    <p>Основной отчёт считается без MT. Вот что меняется, если вернуть курс в расчёт:</p>
+    <div class="months two">
+      <div class="mplaque"><div class="mm">Как в отчёте</div><div class="mt">+10,7 п.п.</div><div class="md">Разрыв по pure retention, июль, без Math Tutoring.</div></div>
+      <div class="mplaque"><div class="mm">Со всеми курсами</div><div class="mt">+10,1 п.п.</div><div class="md">MT слегка занижает результат, но качественно картина та же.</div></div>
+    </div>
 
     <h3>Почему выносим MT</h3>
-    <p>На этом курсе карточку почти не использовали: заполнили лишь у 26%, и даже заполненную открывали только в 21% случаев — против 66% на остальных курсах. Вмешательство до клиентов MT фактически не дошло. Цифры сверены по AMO и таблице фидбэка.</p>
-    <figure>
-      <div class="ftitle">Math Tutoring: карточка почти не использовалась</div>
-      <div class="fsub">июль · доля, %</div>
-      <svg id="c-mt" viewBox="0 0 700 260"></svg>
-    </figure>
+    <p>Дело не в дисциплине заполнения, а в том, что на Math Tutoring карточка — это принципиально другой инструмент.</p>
+    <p>Основную ценность карточки составляет <strong>академический портрет студента</strong>: обратная связь преподавателя о сильных зонах, зонах роста и мотиваторах ребёнка. Это знание, которого у ISM до карточки не было ни в каком виде — оно возникает только потому, что преподаватель его сформулировал. На MT этого блока нет по устройству курса: вместо него в карточку подтягиваются системные данные один к одному — то, что ISM и так видит в своих интерфейсах.</p>
+    <p>То есть на MT вмешательства, которое мы проверяем, по сути не существует: карточка там не создаёт нового знания о студенте, а перекладывает уже имеющееся.</p>
   </section>
 
   <footer>Student Card · внутренний отчёт · данные июнь–июль 2026</footer>
@@ -708,9 +1002,9 @@ function adjust(id){
 
 // ---- CI difference ----
 function ciDiff(id){
-  const svg=document.getElementById(id);const W=700,H=240,L=170,R=24,T=18,B=40;
+  const svg=document.getElementById(id);const W=700,H=240,L=210,R=24,T=18,B=40;
   const xmin=-5,xmax=20;const sx=v=>L+(v-xmin)/(xmax-xmin)*(W-L-R);
-  const rows=[['Pure · без MT',10.7,8.1],['Pure · все курсы',10.1,7.2],['Raw · без MT',5.1,5.2],['Raw · все курсы',4.6,4.7]];
+  const rows=[['retention pure · без MT',10.7,8.1],['retention pure · все курсы',10.1,7.2],['retention raw · без MT',5.1,5.2],['retention raw · все курсы',4.6,4.7]];
   const rh=(H-T-B)/rows.length;
   [-5,0,5,10,15,20].forEach(g=>{svg.appendChild(el('line',{x1:sx(g),y1:T,x2:sx(g),y2:H-B,stroke:g===0?C.ink:C.line,'stroke-width':g===0?1.6:1,'stroke-dasharray':g===0?'':'3 3'}));svg.appendChild(txt(sx(g),H-18,g,{size:11.5,fill:C.faint,mono:true}));});
   rows.forEach((r,i)=>{const [lab,d,e]=r,yy=T+rh*(i+.5),sig=(d-e)>0,col=sig?C.pos:C.neg;
@@ -722,27 +1016,39 @@ function ciDiff(id){
     svg.appendChild(txt(L-12,yy+4,lab,{anchor:'end',size:13,fill:C.muted}));});
 }
 
-// ---- MT usage ----
-function mtUsage(id){
-  const svg=document.getElementById(id);const W=700,H=260,L=46,R=18,T=16,B=54;const ymax=75;
-  const y=v=>T+(ymax-v)/ymax*(H-T-B);const data=[['Заполнена',26,C.neg],['Заполненную\nоткрывали',21,C.neg],['не-MT:\nоткрывали',66,C.pos]];const gw=(W-L-R)/data.length;
-  for(let g=0;g<=ymax;g+=25){svg.appendChild(el('line',{x1:L,y1:y(g),x2:W-R,y2:y(g),stroke:C.line}));svg.appendChild(txt(L-8,y(g)+4,g,{anchor:'end',size:12,fill:C.faint,mono:true}));}
-  data.forEach((d,i)=>{const cx=L+gw*(i+.5),bw=88,yv=y(d[1]);const r=el('rect',{x:cx-bw/2,y:yv,width:bw,height:y(0)-yv,rx:3,fill:d[2]});svg.appendChild(r);
-    if(!reduce){r.style.transformOrigin=`0px ${y(0)}px`;r.animate([{transform:'scaleY(0)'},{transform:'scaleY(1)'}],{duration:650,fill:'backwards',delay:i*100});}
-    svg.appendChild(txt(cx,yv-8,d[1]+'%',{size:14,fill:C.ink,mono:true,w:600}));
-    d[0].split('\n').forEach((ln,k)=>svg.appendChild(txt(cx,H-30+k*15,ln,{size:12.5,fill:C.muted})));});
-}
 
 // ---- render ----
-lineChart('c-ret3',[41.5,29.1,40.3],[40.2,26.6,29.6],['Май','Июнь','Июль'],20,46,'%');
-groupBars('c-may',[{label:'Retention raw',t:32.6,c:31.9},{label:'Retention pure',t:42.7,c:40.2}],50,1,'');
+lineChart('c-ret3',[42.7,29.1,40.3],[40.2,26.6,29.6],['Май','Июнь','Июль'],20,46,'%');
+groupBars('c-may-ret',[{label:'retention raw',t:32.6,c:31.9},{label:'retention pure',t:42.7,c:40.2}],50,1,'');
+groupBars('c-may-money',[{label:'AOV',t:4.05,c:4.27},{label:'revenue/lead',t:1.65,c:1.71}],5,2,'');
 lineChart('c-mj',[42.7,29.1],[40.2,26.6],['Май','Июнь'],20,48,'%');
-lineChart('c-mj-aov',[4.04,4.16],[4.27,3.84],['Май','Июнь'],3.6,4.4,'');
-groupBars('c-jun-ret',[{label:'Retention raw',t:22.9,c:17.5},{label:'Retention pure',t:29.1,c:26.6}],45,1,'');
-groupBars('c-jun-money',[{label:'AOV',t:4.16,c:3.84},{label:'Выручка / лид',t:1.22,c:1.02}],5,2,'');
-groupBars('c-jul-ret',[{label:'Retention raw',t:23.6,c:18.5},{label:'Retention pure',t:40.3,c:29.6}],50,1,'');
-groupBars('c-jul-money',[{label:'AOV',t:3.81,c:3.86},{label:'Выручка / лид',t:1.55,c:1.08}],5,2,'');
-ladder('c-ladder');adjust('c-adj');ciDiff('c-ci');mtUsage('c-mt');
+lineChart('c-mj-aov',[4.05,4.16],[4.27,3.84],['Май','Июнь'],3.6,4.4,'');
+groupBars('c-jun-ret',[{label:'retention raw',t:22.9,c:17.5},{label:'retention pure',t:29.1,c:26.6}],45,1,'');
+groupBars('c-jun-money',[{label:'AOV',t:4.16,c:3.84},{label:'revenue/lead',t:1.22,c:1.02}],5,2,'');
+groupBars('c-jul-ret',[{label:'retention raw',t:23.6,c:18.5},{label:'retention pure',t:40.3,c:29.6}],50,1,'');
+groupBars('c-jul-money',[{label:'AOV',t:3.81,c:3.86},{label:'revenue/lead',t:1.55,c:1.08}],5,2,'');
+ladder('c-ladder');adjust('c-adj');ciDiff('c-ci');
+groupBars('c-pn-dist',[{label:'№2',t:57,c:68},{label:'№3',t:19,c:15},{label:'№4+',t:24,c:18}],80,0,'%');
+// horizontal grouped bars (distribution)
+function hbars(id,rows,xmax,unit){
+  const svg=document.getElementById(id);const vb=svg.viewBox.baseVal;const W=vb.width,H=vb.height;
+  const L=148,R=52,T=8,B=8;const bw=W-L-R;const rowH=(H-T-B)/rows.length;const sx=v=>v/xmax*bw;
+  rows.forEach((r,i)=>{const cy=T+i*rowH;const bh=Math.min(12,rowH/2-3);
+    svg.appendChild(txt(L-10,cy+rowH/2+4,r.label,{anchor:'end',size:12.5,fill:C.ink}));
+    const yt=cy+rowH/2-bh-2, yc=cy+rowH/2+2;
+    svg.appendChild(el('rect',{x:L,y:yt,width:Math.max(1,sx(r.t)),height:bh,rx:2,fill:C.test}));
+    svg.appendChild(txt(L+sx(r.t)+6,yt+bh-1,r.t.toFixed(0)+unit,{anchor:'start',size:11,fill:C.ink,mono:true,w:600}));
+    svg.appendChild(el('rect',{x:L,y:yc,width:Math.max(1,sx(r.c)),height:bh,rx:2,fill:C.ctrl}));
+    svg.appendChild(txt(L+sx(r.c)+6,yc+bh-1,r.c.toFixed(0)+unit,{anchor:'start',size:11,fill:C.faint,mono:true,w:600}));
+  });
+}
+hbars('c-course-mix',[
+  {label:'Visual Programing',t:3.6,c:14.6},
+  {label:'Math',t:10.4,c:5.8},
+  {label:'Game design',t:6.9,c:2.8},
+  {label:'Scratch',t:9.6,c:7.1},
+  {label:'Прочие курсы',t:69.5,c:69.7},
+],75,'%');
 
 // month slopes small multiples
 function buildSlopes(containerId,items){
