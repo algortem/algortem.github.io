@@ -41,7 +41,7 @@
   /* ---- header ---- */
   header{padding:52px 0 30px;border-bottom:1px solid var(--line)}
   header h1{font-size:clamp(34px,6vw,56px);font-weight:700;margin:.28em 0 .22em;letter-spacing:-.025em}
-  header .lede{font-size:19px;color:var(--muted);max-width:52ch;margin:0}
+  header .lede{font-size:19px;color:var(--muted);max-width:820px;margin:0}
 
   /* ---- hero result ---- */
   .hero{padding:52px 0 8px}
@@ -122,14 +122,18 @@
   .dtable tr.gaprow td{border-top:1px solid var(--line2);border-bottom:none;color:var(--ink);font-weight:600}
   .dtable tr.gaprow td:first-child{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:500}
   .tcap{font-size:13px;color:var(--muted);line-height:1.5;margin:4px 0 0}
-  details.perism{margin:12px 0 4px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card)}
-  details.perism>summary{cursor:pointer;padding:12px 16px;font-family:var(--mono);font-size:12px;letter-spacing:.04em;color:var(--muted);list-style:none;user-select:none}
+  details.perism{margin:12px 0 4px;border:1px solid var(--line2);border-radius:12px;overflow:hidden;background:var(--card)}
+  .perism-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+  @media(max-width:620px){.perism-grid{grid-template-columns:1fr}}
+  details.perism>summary{cursor:pointer;padding:13px 16px;font-family:var(--mono);font-size:13.5px;letter-spacing:.03em;color:var(--ink);font-weight:600;background:var(--wash);list-style:none;user-select:none}
+  details.perism[open]>summary{border-bottom:1px solid var(--line)}
   details.perism>summary::-webkit-details-marker{display:none}
-  details.perism>summary::before{content:'▸ ';color:var(--faint)}
+  details.perism>summary::before{content:'▸ ';color:var(--test)}
   details.perism[open]>summary::before{content:'▾ '}
-  details.perism .tw{margin:0;padding:0 12px 10px}
-  details.perism .dtable{font-size:13px}
-  details.perism .dtable th,details.perism .dtable td{padding:7px 9px}
+  details.perism .tw{margin:0;padding:10px 12px 12px}
+  details.perism .dtable{font-size:12px}
+  details.perism .dtable th,details.perism .dtable td{padding:5px 6px}
+  @media(max-width:620px){details.perism{grid-template-columns:1fr}}
 
   /* ---- chart card ---- */
   figure{margin:18px 0;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px 14px}
@@ -279,24 +283,7 @@
     <h2>Май — первый запуск</h2>
     <p>В мае у нас было <strong>всего 2 менеджера</strong> и самая сырая версия карточки — запуск был нужен, чтобы <strong>собрать обратную связь</strong>, а не измерить импакт.</p>
 
-    <h3>Цель №1 — собрать качественную обратную связь</h3>
-    <p>Два менеджера две недели (со второй половины мая) пользовались карточкой, а преподаватели заполняли опрос - и давали фидбэк. Заполняли карточки <strong>не всегда вовремя</strong> — поэтому цифры пилота ничего не доказывают, но именно так мы нашли косяки и доработали инструмент.</p>
-
-    <div class="callout">
-      <span class="tag">Почему это не вывод</span>
-      В мае мы не могли гарантировать заполнение и <strong>не логировали, когда карточку заполнили относительно звонка и платежа</strong> — связать её с результатом невозможно. Карточки заполняли кому придётся, препы только знакомились с инструментом, а выборка крошечная. Так что цифры ниже — про случай и отбор, а не про карточку.
-    </div>
-
-    <div class="tw"><table class="dtable">
-      <thead><tr><th>Май · пилот, 2 ISM</th><th>Лиды</th><th>Валид.</th><th>Retention raw</th><th>Retention pure</th></tr></thead>
-      <tbody>
-        <tr class="t"><td>С карточкой</td><td>75</td><td>54</td><td>9,3%</td><td>13,0%</td></tr>
-        <tr><td>Без карточки</td><td>128</td><td>62</td><td>25,0%</td><td>40,3%</td></tr>
-      </tbody>
-    </table></div>
-    <p class="tcap">Да, у пилота лиды с карточкой продлились даже <strong>хуже</strong> (13% против 40% по pure). Но это <strong>54 валидных лида</strong> без контроля за тем, когда заполняли карточку — чистый шум. В мае мы это и не измеряли.</p>
-
-    <h3>Цель №2 — зафиксировать базовые значения по группам</h3>
+    <h3>Базовые значения по группам</h3>
     <p>Заодно зафиксируем, что мы называем группами — это определение работает и для июня, и для июля:</p>
     <div class="metrics">
       <div class="mrow"><span class="mtag pri">Тест</span><div>10 отобранных менеджеров и <b>все их лиды с заполненной карточкой</b>.</div></div>
@@ -322,6 +309,7 @@
     </figure>
     <details class="perism">
       <summary>Разбивка по менеджерам · май</summary>
+      <div class="perism-grid">
       <div class="tw"><table class="dtable"><thead><tr><th>Тест · ISM</th><th>Лиды</th><th>Ret. raw</th><th>Ret. pure</th></tr></thead><tbody>
 <tr><td>Angel</td><td>75</td><td>24.0%</td><td>40.6%</td></tr>
 <tr><td>Echa</td><td>72</td><td>20.8%</td><td>34.1%</td></tr>
@@ -347,6 +335,7 @@
 <tr><td>Suci</td><td>91</td><td>52.7%</td><td>63.1%</td></tr>
 <tr class="gaprow"><td>Итого (pooled)</td><td>1063</td><td>31.9%</td><td>40.2%</td></tr>
 </tbody></table></div>
+      </div>
     </details>
 
     <p><strong>Что дал май:</strong> живое использование, обратную связь и отладку процесса — ISM потрогали инструмент, мы нашли, где возникают косяки, поправили и добавили поля в обратную связь. За выводами пошли в июнь, уже с нормальными группами.</p>
@@ -382,6 +371,7 @@
     <p class="tcap">Чек и выручка на лид — в млн Rp. Разрыв по pure retention (+2,5 п.п.) статистически <strong>не значим</strong> — что и ожидаемо для шумного сезонного месяца. А вот по деньгам тест выше уверенно.</p>
     <details class="perism">
       <summary>Разбивка по менеджерам · июнь</summary>
+      <div class="perism-grid">
       <div class="tw"><table class="dtable"><thead><tr><th>Тест · ISM</th><th>Лиды</th><th>Ret. raw</th><th>Ret. pure</th><th>Rev, млн</th><th>AOV, млн</th></tr></thead><tbody>
 <tr><td>Angel</td><td>39</td><td>30.8%</td><td>37.5%</td><td>57.3</td><td>4.77</td></tr>
 <tr><td>Echa</td><td>34</td><td>14.7%</td><td>23.8%</td><td>17.2</td><td>3.44</td></tr>
@@ -412,6 +402,7 @@
 <tr><td>Zaenab</td><td>110</td><td>4.5%</td><td>6.8%</td><td>25.0</td><td>5.00</td></tr>
 <tr class="gaprow"><td>Итого (pooled)</td><td>1125</td><td>17.5%</td><td>26.6%</td><td>756.5</td><td>3.84</td></tr>
 </tbody></table></div>
+      </div>
     </details>
 
 
@@ -477,6 +468,7 @@
     <p class="tcap">Разрыв по pure retention +10,7 п.п. — значим на уровне <strong>99%</strong>. Средний чек практически сравнялся (−0,05), а вот выручка на лид у теста в полтора раза выше (1,55 против 1,08) — за счёт именно удержания.</p>
     <details class="perism">
       <summary>Разбивка по менеджерам · июль</summary>
+      <div class="perism-grid">
       <div class="tw"><table class="dtable"><thead><tr><th>Тест · ISM</th><th>Лиды</th><th>Ret. raw</th><th>Ret. pure</th><th>Rev, млн</th><th>AOV, млн</th></tr></thead><tbody>
 <tr><td>Angel</td><td>31</td><td>9.7%</td><td>23.1%</td><td>20.1</td><td>6.69</td></tr>
 <tr><td>Echa</td><td>50</td><td>10.0%</td><td>22.7%</td><td>17.4</td><td>3.47</td></tr>
@@ -509,6 +501,7 @@
 <tr><td>Zaenab</td><td>12</td><td>0.0%</td><td>0.0%</td><td>0.0</td><td>0.00</td></tr>
 <tr class="gaprow"><td>Итого (pooled)</td><td>942</td><td>18.5%</td><td>29.6%</td><td>671.1</td><td>3.86</td></tr>
 </tbody></table></div>
+      </div>
     </details>
 
 
@@ -529,11 +522,20 @@
     </div>
 
     <h3>Динамика июнь → июль</h3>
-    <figure>
-      <div class="ftitle">Тест против контроля · июнь → июль</div>
-      <div class="multi" id="jj"></div>
-      <figcaption>После июня просели все, но тест по pure retention резко пошёл вверх и оторвался от контроля (29,1% → 40,3% против 26,6% → 29,6%). DiD июнь→июль по pure = <strong>+8,2 п.п.</strong> AOV у теста при этом чуть снизился — деньги пришли через конверсию, а не через чек. Raw retention почти ровный.</figcaption>
-    </figure>
+    <div class="pair">
+      <figure>
+        <div class="ftitle">Retention pure</div>
+        <div class="legend"><span><i style="border-color:var(--test)"></i>Тест</span><span><i style="border-color:var(--ctrl);border-top-style:dashed"></i>Контроль</span></div>
+        <svg id="c-jj-ret" viewBox="0 0 700 210"></svg>
+        <figcaption>Тест 29,1% → 40,3%, контроль 26,6% → 29,6%. DiD = <strong>+8,2 п.п.</strong> — вот здесь линии и расходятся.</figcaption>
+      </figure>
+      <figure>
+        <div class="ftitle">AOV, млн Rp</div>
+        <div class="legend"><span><i style="border-color:var(--test)"></i>Тест</span><span><i style="border-color:var(--ctrl);border-top-style:dashed"></i>Контроль</span></div>
+        <svg id="c-jj-aov" viewBox="0 0 700 210"></svg>
+        <figcaption>Тест 4,16 → 3,81, контроль 3,84 → 3,86. По чеку тест даже снизился — деньги в июле пришли через удержание, а не через чек.</figcaption>
+      </figure>
+    </div>
 
     <div class="callout"><span class="tag">Гипотеза</span>Здесь будет гипотеза, почему в июле вырос retention, а не чек.</div>
   </section>
@@ -757,11 +759,8 @@ function buildSlopes(containerId,items){
     mk(it.c,C.ctrl,true);mk(it.t,C.test,false);
     s.appendChild(txt(x(0),H-10,it.xl[0],{size:11,fill:C.faint}));s.appendChild(txt(x(1),H-10,it.xl[1],{size:11,fill:C.faint}));});
 }
-buildSlopes('jj',[
-  {title:'Retention pure, %',t:[29.1,40.3],c:[26.6,29.6],dec:1,xl:['Июнь','Июль']},
-  {title:'AOV, млн Rp',t:[4.16,3.81],c:[3.84,3.86],dec:2,xl:['Июнь','Июль']},
-  {title:'Retention raw, %',t:[22.9,23.6],c:[17.5,18.5],dec:1,xl:['Июнь','Июль']},
-]);
+lineChart('c-jj-ret',[29.1,40.3],[26.6,29.6],['Июнь','Июль'],20,46,'%');
+lineChart('c-jj-aov',[4.16,3.81],[3.84,3.86],['Июнь','Июль'],3.6,4.4,'');
 // ---- TOC scroll spy ----
 (function(){
   const links=[...document.querySelectorAll('.toc a')];
